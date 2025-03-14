@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ui-bloom",
+  "homepage": "https://ui-bloom.vercel.app/",
+  "items": [
+    {
+      "name": "password-input",
+      "type": "registry:ui",
+      "title": "Password Input",
+      "description": "A password input field with a toggle option to show or hide the password.",
+      "registryDependencies": ["form"],
+      "files": [
+        {
+          "path": "src/registry/password-input/password-input.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/registry/password-input/password.css",
+          "type": "registry:file",
+          "target": "app/global.css"
+        }
+      ]
+    },
+    {
+      "name": "field-renderer",
+      "type": "registry:ui",
+      "title": "Field Renderer",
+      "description": "A password input field with a toggle option to show or hide the password.",
+      "registryDependencies": ["form"],
+      "files": [
+        {
+          "path": "src/registry/field-renderer/field-renderer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}
