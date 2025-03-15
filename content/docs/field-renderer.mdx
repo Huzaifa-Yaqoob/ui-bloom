@@ -1,0 +1,54 @@
+---
+title: "Field Renderer"
+description: "A wrapper around the Input field that helps reduce the lines of code, so you don't have to use each component from shadcn Form like FormControl, FormDescription, FormItem, FormLabel, and FormMessage."
+---
+
+import FieldRendererForm from "@/components/forms/field-renderer-form";
+import PackageInstall from "@/components/docs/PackageInstall";
+import PreviewTabs from "@/components/docs/PreviewTabs";
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import config from "config.ts";
+
+<Callout title="Usage Restriction">
+  This component should only be used inside a form component.
+</Callout>
+
+## Preview
+
+{<PreviewTabs component={<FieldRendererForm />} fileUrl={"/components/forms/field-renderer-form.tsx"} name={"password-input"}/>}
+
+## Installation
+
+{<PackageInstall name={"field-renderer"}/>}
+
+## Usage
+
+```tsx
+import { PasswordInput } from "@/components/ui/field-renderer";
+```
+
+```tsx
+<FormField
+  control={form.control}
+  name="username"
+  render={({ field }) => (
+    <FieldRenderer label="Username">
+      <Input placeholder="username" {...field} />
+    </FieldRenderer>
+  )}
+/>
+```
+
+## Accepted Props
+
+| Prop          | Type              | Description                                      |
+| ------------- | ----------------- | ------------------------------------------------ |
+| `label`       | `React.ReactNode` | The label displayed above the input field.       |
+| `description` | `React.ReactNode` | Optional description text below the input field. |
+| `children`    | `React.ReactNode` | The input element or any additional children.    |
+
+## Dependencies
+
+This component depends on the `Form` component from shadcn/ui. Ensure you have it installed and set up correctly.
+
+[View Form Component Documentation](https://ui.shadcn.com/docs/components/form)
