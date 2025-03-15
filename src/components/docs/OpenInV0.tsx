@@ -1,24 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import config from "config";
 
 export function OpenInV0({
   name,
-  className,
 }: { name: string } & React.ComponentProps<typeof Button>) {
   return (
-    <Button
-      aria-label="Open in v0"
-      className={cn(
-        "h-7 gap-1 rounded-lg shadow-none bg-black px-3 text-xs text-white hover:bg-black hover:text-white dark:bg-white dark:text-black",
-        className
-      )}
-      asChild
-    >
+    <Button aria-label="Open in v0" asChild>
       <a
         href={`https://v0.dev/chat/api/open?url=${config.baseUrl}/r/${name}.json`}
         target="_blank"
         rel="noreferrer"
+        className="no-underline"
       >
         Open in{" "}
         <svg
