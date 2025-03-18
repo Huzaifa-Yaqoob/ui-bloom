@@ -1,9 +1,9 @@
-import { PasswordInputForm } from "@/components/forms/password-input";
+import { ReactSelectForm } from "@/components/forms/react-select-form";
 
 export default function Page() {
   return (
-    <div className="max-w-[800px]">
-      <PasswordInputForm />
+    <div className="w-[500px]">
+      <ReactSelectForm />
     </div>
   );
 }

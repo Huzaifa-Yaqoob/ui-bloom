@@ -4,6 +4,6 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="flex items-center justify-center h-svh">{children}</main>
+    <main className="flex items-center justify-center h-svh ">{children}</main>
   );
 }
