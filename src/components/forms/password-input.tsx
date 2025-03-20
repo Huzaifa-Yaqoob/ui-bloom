@@ -10,7 +10,7 @@ import { PasswordInput } from "@/registry/password-input/password-input";
 import PreviewWrapper from "../common/preview-wrapper";
 
 const formSchema = z.object({
-  password: z.string().min(2).max(50),
+  password: z.string().min(8).max(50),
 });
 
 export function PasswordInputForm() {

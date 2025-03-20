@@ -7,10 +7,48 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import FieldRenderer from "@/registry/field-renderer/field-renderer";
 import PreviewWrapper from "../common/preview-wrapper";
-import ReactSelect from "@/registry/react-select/react-select";
+import {
+  ReactSelect,
+  convertToOptions,
+  ReactAsyncSelect,
+  MyOption,
+  ReactCreatableSelect,
+  ReactAsyncCreatableSelect,
+} from "@/registry/react-select/react-select";
 
 const formSchema = z.object({
-  color: z.any(),
+  color: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .min(3),
+  color2: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .min(3),
+  color3: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .min(3),
+  color4: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .min(3),
 });
 
 const groupedOptions = [
@@ -103,12 +141,28 @@ const options = [
   { value: "smoothie", label: "Smoothie" },
 ];
 
+const filterColors = (inputValue: string) => {
+  return options.filter((i) =>
+    i.label.toLowerCase().includes(inputValue.toLowerCase())
+  );
+};
+
+const promiseOptions = (inputValue: string) =>
+  new Promise<MyOption[]>((resolve) => {
+    setTimeout(() => {
+      resolve(filterColors(inputValue));
+    }, 1000);
+  });
+
 export function ReactSelectForm() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      color: "smoothie",
+      color: convertToOptions(["smoothie", "juice"], groupedOptions),
+      color2: [],
+      color3: [],
+      color4: [],
     },
   });
 
@@ -131,12 +185,48 @@ export function ReactSelectForm() {
           name="color"
           render={({ field }) => (
             <FieldRenderer label="Color">
-              <ReactSelect
-                options={groupedOptions}
-                isMulti
-                closeMenuOnSelect={false}
-                defaultValue={["smoothie"]}
+              <ReactSelect {...field} options={groupedOptions} isMulti />
+            </FieldRenderer>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="color2"
+          render={({ field }) => (
+            <FieldRenderer label="Color2">
+              <ReactAsyncSelect
                 {...field}
+                isMulti
+                defaultOptions={groupedOptions}
+                closeMenuOnSelect={false}
+                loadOptions={promiseOptions}
+              />
+            </FieldRenderer>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="color3"
+          render={({ field }) => (
+            <FieldRenderer label="Color3">
+              <ReactCreatableSelect
+                {...field}
+                isMulti
+                options={groupedOptions}
+              />
+            </FieldRenderer>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="color4"
+          render={({ field }) => (
+            <FieldRenderer label="Color4">
+              <ReactAsyncCreatableSelect
+                {...field}
+                isMulti
+                defaultOptions={groupedOptions}
+                loadOptions={promiseOptions}
               />
             </FieldRenderer>
           )}
@@ -146,7 +236,6 @@ export function ReactSelectForm() {
           <Button
             type="button"
             onClick={() => {
-              console.log("as");
               form.reset();
             }}
           >

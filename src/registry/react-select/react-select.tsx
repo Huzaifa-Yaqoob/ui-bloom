@@ -1,12 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, ComponentProps } from "react";
 import { X, ChevronDown, Loader } from "lucide-react";
 import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
 import {
-  Props as SelectProps,
   OptionsOrGroups,
   GroupBase,
   ClearIndicatorProps,
@@ -15,31 +13,56 @@ import {
   LoadingIndicatorProps,
   MultiValueRemoveProps,
 } from "react-select";
-import "./reactSelect.css";
 
 const Select = dynamic(() => import("react-select"), { ssr: false });
 
-interface MyOptionType {
-  value: string;
-  label: string;
+const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
+
+const CreatableSelect = dynamic(() => import("react-select/creatable"), {
+  ssr: false,
+});
+
+const AsyncCreatableSelect = dynamic(
+  () => import("react-select/async-creatable"),
+  {
+    ssr: false,
+  }
+);
+
+interface MyOption {
   [key: string]: any;
 }
+type MyOptions = OptionsOrGroups<MyOption, GroupBase<MyOption>> | undefined;
+type ReactSelectProps = ComponentProps<typeof Select>;
+type ReactCreatableSelectProps = ComponentProps<typeof CreatableSelect>;
+type ReactAsyncSelectProps = ComponentProps<typeof AsyncSelect>;
+type ReactAsyncCreatableSelectProps = ComponentProps<
+  typeof AsyncCreatableSelect
+>;
 
-type MyOptions =
-  | OptionsOrGroups<MyOptionType, GroupBase<MyOptionType>>
-  | undefined;
+const customClassNames = {
+  menuList: "space-y-1",
+  placeholder: "text-muted-foreground",
+  control:
+    "focus-visible:ring-[3px] selection:bg-primary selection:text-primary-foreground rounded-md bg-transparent dark:bg-input/30 border border-input p-2 text-base shadow-xs transition-[color,box-shadow] focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-ring max-h-32 overflow-y-scroll no-scrollbar ",
+  menu: "bg-accent rounded-md px-4 py-2 shadow-md",
+  clearIndicator:
+    "text-destructive/50 hover:text-destructive/80 cursor-pointer",
+  option: "hover:bg-accent-foreground/50 p-1 rounded",
+  selectedOption: "bg-accent-foreground text-accent",
+  dropdownIndicator: "text-foreground/50 cursor-pointer",
+  multiValue: "bg-accent px-1 rounded-sm",
+  valueContainer: "flex gap-2",
+  multiValueRemove: "ml-1",
+  groupHeading: "text-sm text-muted-foreground",
+  loadingIndicator: "animate-spin",
+  areaInvalid:
+    "focus-visible:ring-destructive/20 border-destructive dark:ring-destructive/40 focus-within:ring-destructive/20 focus-within:border-destructive dark:focus-within:ring-destructive/40",
+  areaValid: "focus-visible:border-ring focus-visible:ring-ring/50",
+  disabled: "opacity-50 cursor-not-allowed pointer-events-none",
+};
 
-type ReactSelectProps = Omit<
-  SelectProps,
-  "defaultValue" | "value" | "options" | "unstyled"
-> &
-  Omit<InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value"> & {
-    defaultValue?: SelectProps["defaultValue"] | string[] | string;
-    value?: SelectProps["value"] | string[] | string;
-    options: MyOptions;
-  };
-
-export default function ReactSelect({
+function ReactSelect({
   classNames = {},
   options,
   components = {},
@@ -69,17 +92,10 @@ export default function ReactSelect({
     ...otherComponents
   } = components;
 
-  const flatOptions = useMemo(() => {
-    if (!options) {
-      return undefined;
-    }
-    return flattenOptions(options);
-  }, [options]);
-
   return (
     <Select
-      {...selectProps}
       unstyled={true}
+      {...selectProps}
       options={options}
       components={{
         ClearIndicator: ClearIndicator || CustomClearIndicator,
@@ -91,50 +107,318 @@ export default function ReactSelect({
       classNames={{
         control: (props) =>
           cn(
-            "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-            "selection:bg-primary selection:text-primary-foreground",
-            "rounded-md bg-transparent dark:bg-input/30 border border-input p-2 text-base shadow-xs transition-[color,box-shadow] focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-ring max-h-32 overflow-y-scroll no-scrollbar",
+            customClassNames.control,
+            props?.selectProps?.["aria-invalid"]
+              ? customClassNames.areaInvalid
+              : customClassNames.areaValid,
+            props.selectProps.isDisabled ? customClassNames.disabled : "",
             control?.(props) && ""
           ),
         placeholder: (props) =>
-          cn("text-muted-foreground", placeholder?.(props) && ""),
-        menu: (props) =>
-          cn("bg-accent rounded-md px-4 py-2 shadow-md", menu?.(props) && ""),
-        menuList: (props) => cn("space-y-1", menuList?.(props) && ""),
+          cn(customClassNames.placeholder, placeholder?.(props) && ""),
+        menu: (props) => cn(customClassNames.menu, menu?.(props) && ""),
+        menuList: (props) =>
+          cn(customClassNames.menuList, menuList?.(props) && ""),
         option: (props) =>
           cn(
-            "hover:bg-accent-foreground/50 p-1 rounded",
-            props.isSelected ? "bg-accent-foreground text-accent" : "",
+            customClassNames.option,
+            props.isSelected ? customClassNames.selectedOption : "",
             option?.(props) && ""
           ),
         dropdownIndicator: (props) =>
           cn(
-            "text-foreground/50 cursor-pointer",
+            customClassNames.dropdownIndicator,
             dropdownIndicator?.(props) && ""
           ),
         clearIndicator: (props) =>
-          cn(
-            "text-destructive/50 hover:text-destructive/80 cursor-pointer",
-            clearIndicator?.(props) ?? ""
-          ),
+          cn(customClassNames.clearIndicator, clearIndicator?.(props) ?? ""),
         valueContainer: (props) =>
-          cn("flex gap-2", valueContainer?.(props) ?? ""),
+          cn(customClassNames.valueContainer, valueContainer?.(props) ?? ""),
         multiValue: (props) =>
-          cn("bg-accent px-1 rounded-sm", multiValue?.(props) ?? ""),
+          cn(customClassNames.multiValue, multiValue?.(props) ?? ""),
         multiValueRemove: (props) =>
-          cn(
-            "hover:text-destructive cursor-pointer ml-1",
-            multiValueRemove?.(props) && ""
-          ),
+          cn(customClassNames.multiValue, multiValueRemove?.(props) && ""),
         groupHeading: (props) =>
-          cn("text-sm text-muted-foreground", groupHeading?.(props) ?? ""),
-        loadingIndicator: (props) => cn("", loadingIndicator?.(props) ?? ""),
+          cn(customClassNames.groupHeading, groupHeading?.(props) ?? ""),
+        loadingIndicator: (props) =>
+          cn(
+            customClassNames.loadingIndicator,
+            loadingIndicator?.(props) ?? ""
+          ),
         ...otherClasses,
       }}
     />
   );
 }
 
+function ReactAsyncSelect({
+  classNames = {},
+  options,
+  components = {},
+  ...selectProps
+}: ReactAsyncSelectProps) {
+  const {
+    menuList,
+    placeholder,
+    control,
+    menu,
+    clearIndicator,
+    option,
+    dropdownIndicator,
+    multiValue,
+    valueContainer,
+    multiValueRemove,
+    groupHeading,
+    loadingIndicator,
+    ...otherClasses
+  } = classNames;
+
+  const {
+    ClearIndicator,
+    DropdownIndicator,
+    LoadingIndicator,
+    MultiValueRemove,
+    ...otherComponents
+  } = components;
+
+  return (
+    <AsyncSelect
+      unstyled={true}
+      {...selectProps}
+      options={options}
+      components={{
+        ClearIndicator: ClearIndicator || CustomClearIndicator,
+        LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
+        DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
+        MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
+        ...otherComponents,
+      }}
+      classNames={{
+        control: (props) =>
+          cn(
+            customClassNames.control,
+            props?.selectProps?.["aria-invalid"]
+              ? customClassNames.areaInvalid
+              : customClassNames.areaValid,
+            props.selectProps.isDisabled ? customClassNames.disabled : "",
+            control?.(props) && ""
+          ),
+        placeholder: (props) =>
+          cn(customClassNames.placeholder, placeholder?.(props) && ""),
+        menu: (props) => cn(customClassNames.menu, menu?.(props) && ""),
+        menuList: (props) =>
+          cn(customClassNames.menuList, menuList?.(props) && ""),
+        option: (props) =>
+          cn(
+            customClassNames.option,
+            props.isSelected ? customClassNames.selectedOption : "",
+            option?.(props) && ""
+          ),
+        dropdownIndicator: (props) =>
+          cn(
+            customClassNames.dropdownIndicator,
+            dropdownIndicator?.(props) && ""
+          ),
+        clearIndicator: (props) =>
+          cn(customClassNames.clearIndicator, clearIndicator?.(props) ?? ""),
+        valueContainer: (props) =>
+          cn(customClassNames.valueContainer, valueContainer?.(props) ?? ""),
+        multiValue: (props) =>
+          cn(customClassNames.multiValue, multiValue?.(props) ?? ""),
+        multiValueRemove: (props) =>
+          cn(customClassNames.multiValue, multiValueRemove?.(props) && ""),
+        groupHeading: (props) =>
+          cn(customClassNames.groupHeading, groupHeading?.(props) ?? ""),
+        loadingIndicator: (props) =>
+          cn(
+            customClassNames.loadingIndicator,
+            loadingIndicator?.(props) ?? ""
+          ),
+        ...otherClasses,
+      }}
+    />
+  );
+}
+
+function ReactCreatableSelect({
+  classNames = {},
+  options,
+  components = {},
+  ...selectProps
+}: ReactCreatableSelectProps) {
+  const {
+    menuList,
+    placeholder,
+    control,
+    menu,
+    clearIndicator,
+    option,
+    dropdownIndicator,
+    multiValue,
+    valueContainer,
+    multiValueRemove,
+    groupHeading,
+    loadingIndicator,
+    ...otherClasses
+  } = classNames;
+
+  const {
+    ClearIndicator,
+    DropdownIndicator,
+    LoadingIndicator,
+    MultiValueRemove,
+    ...otherComponents
+  } = components;
+
+  return (
+    <CreatableSelect
+      unstyled={true}
+      {...selectProps}
+      options={options}
+      components={{
+        ClearIndicator: ClearIndicator || CustomClearIndicator,
+        LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
+        DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
+        MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
+        ...otherComponents,
+      }}
+      classNames={{
+        control: (props) =>
+          cn(
+            customClassNames.control,
+            props?.selectProps?.["aria-invalid"]
+              ? customClassNames.areaInvalid
+              : customClassNames.areaValid,
+            props.selectProps.isDisabled ? customClassNames.disabled : "",
+            control?.(props) && ""
+          ),
+        placeholder: (props) =>
+          cn(customClassNames.placeholder, placeholder?.(props) && ""),
+        menu: (props) => cn(customClassNames.menu, menu?.(props) && ""),
+        menuList: (props) =>
+          cn(customClassNames.menuList, menuList?.(props) && ""),
+        option: (props) =>
+          cn(
+            customClassNames.option,
+            props.isSelected ? customClassNames.selectedOption : "",
+            option?.(props) && ""
+          ),
+        dropdownIndicator: (props) =>
+          cn(
+            customClassNames.dropdownIndicator,
+            dropdownIndicator?.(props) && ""
+          ),
+        clearIndicator: (props) =>
+          cn(customClassNames.clearIndicator, clearIndicator?.(props) ?? ""),
+        valueContainer: (props) =>
+          cn(customClassNames.valueContainer, valueContainer?.(props) ?? ""),
+        multiValue: (props) =>
+          cn(customClassNames.multiValue, multiValue?.(props) ?? ""),
+        multiValueRemove: (props) =>
+          cn(customClassNames.multiValue, multiValueRemove?.(props) && ""),
+        groupHeading: (props) =>
+          cn(customClassNames.groupHeading, groupHeading?.(props) ?? ""),
+        loadingIndicator: (props) =>
+          cn(
+            customClassNames.loadingIndicator,
+            loadingIndicator?.(props) ?? ""
+          ),
+        ...otherClasses,
+      }}
+    />
+  );
+}
+
+function ReactAsyncCreatableSelect({
+  classNames = {},
+  options,
+  components = {},
+  ...selectProps
+}: ReactAsyncCreatableSelectProps) {
+  const {
+    menuList,
+    placeholder,
+    control,
+    menu,
+    clearIndicator,
+    option,
+    dropdownIndicator,
+    multiValue,
+    valueContainer,
+    multiValueRemove,
+    groupHeading,
+    loadingIndicator,
+    ...otherClasses
+  } = classNames;
+
+  const {
+    ClearIndicator,
+    DropdownIndicator,
+    LoadingIndicator,
+    MultiValueRemove,
+    ...otherComponents
+  } = components;
+
+  return (
+    <AsyncCreatableSelect
+      unstyled={true}
+      {...selectProps}
+      options={options}
+      components={{
+        ClearIndicator: ClearIndicator || CustomClearIndicator,
+        LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
+        DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
+        MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
+        ...otherComponents,
+      }}
+      classNames={{
+        control: (props) =>
+          cn(
+            customClassNames.control,
+            props?.selectProps?.["aria-invalid"]
+              ? customClassNames.areaInvalid
+              : customClassNames.areaValid,
+            props.selectProps.isDisabled ? customClassNames.disabled : "",
+            control?.(props) && ""
+          ),
+        placeholder: (props) =>
+          cn(customClassNames.placeholder, placeholder?.(props) && ""),
+        menu: (props) => cn(customClassNames.menu, menu?.(props) && ""),
+        menuList: (props) =>
+          cn(customClassNames.menuList, menuList?.(props) && ""),
+        option: (props) =>
+          cn(
+            customClassNames.option,
+            props.isSelected ? customClassNames.selectedOption : "",
+            option?.(props) && ""
+          ),
+        dropdownIndicator: (props) =>
+          cn(
+            customClassNames.dropdownIndicator,
+            dropdownIndicator?.(props) && ""
+          ),
+        clearIndicator: (props) =>
+          cn(customClassNames.clearIndicator, clearIndicator?.(props) ?? ""),
+        valueContainer: (props) =>
+          cn(customClassNames.valueContainer, valueContainer?.(props) ?? ""),
+        multiValue: (props) =>
+          cn(customClassNames.multiValue, multiValue?.(props) ?? ""),
+        multiValueRemove: (props) =>
+          cn(customClassNames.multiValue, multiValueRemove?.(props) && ""),
+        groupHeading: (props) =>
+          cn(customClassNames.groupHeading, groupHeading?.(props) ?? ""),
+        loadingIndicator: (props) =>
+          cn(
+            customClassNames.loadingIndicator,
+            loadingIndicator?.(props) ?? ""
+          ),
+        ...otherClasses,
+      }}
+    />
+  );
+}
+
+// custom components
 function CustomClearIndicator(props: ClearIndicatorProps) {
   return (
     <components.ClearIndicator {...props}>
@@ -158,9 +442,10 @@ function CustomDropdownIndicator(props: DropdownIndicatorProps) {
 }
 
 function CustomLoadingIndicator(props: LoadingIndicatorProps) {
+  const { className } = props;
   return (
     <div {...props}>
-      <Loader size={18} className="animate-spin" />
+      <Loader size={18} />
     </div>
   );
 }
@@ -168,13 +453,53 @@ function CustomLoadingIndicator(props: LoadingIndicatorProps) {
 function CustomMultiValueRemove(props: MultiValueRemoveProps) {
   return (
     <components.MultiValueRemove {...props}>
-      <X size={14} />
+      <X size={14} className="hover:text-destructive cursor-pointer" />
     </components.MultiValueRemove>
   );
 }
 
-function flattenOptions(options: Exclude<MyOptions, undefined>) {
-  return options.flatMap((option) =>
+// helper functions
+const map = new Map();
+
+function flattenOptions(options: Exclude<MyOptions, undefined>): MyOption[] {
+  const jsonOptions = JSON.stringify(options);
+  if (map.has(jsonOptions)) {
+    return map.get(jsonOptions);
+  }
+  const flatOptions = options.flatMap((option) =>
     option.options ? option.options : option
   );
+  map.set(jsonOptions, flatOptions);
+  return flatOptions;
 }
+
+function convertToOptions(
+  values: string[],
+  options: Exclude<MyOptions, undefined>,
+  valueField: string = "value"
+) {
+  const flatOptions = flattenOptions(options);
+  const selectedOptions = values.map((v) => {
+    return flatOptions.filter((o) => o[valueField] === v)[0];
+  });
+
+  return selectedOptions;
+}
+
+function getFields(field: string, selectedOptions: MyOption[] | undefined) {
+  if (selectedOptions) {
+    return selectedOptions.map((so) => so[field]);
+  }
+  return [];
+}
+
+export {
+  ReactSelect,
+  convertToOptions,
+  getFields,
+  ReactAsyncSelect,
+  ReactCreatableSelect,
+  ReactAsyncCreatableSelect,
+  type MyOption,
+  type MyOptions,
+};
