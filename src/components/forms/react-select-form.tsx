@@ -13,7 +13,7 @@ import {
   MyOption,
   ReactCreatableSelect,
   ReactAsyncCreatableSelect,
-} from "@/registry/react-select/react-select";
+} from "@/registry/react-select-input/react-select-input";
 
 const formSchema = z.object({
   color: z

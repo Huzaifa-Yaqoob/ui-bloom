@@ -37,7 +37,7 @@
       "dependencies": ["react-select@5.10.1"],
       "files": [
         {
-          "path": "src/registry/react-select/react-select.tsx",
+          "path": "src/registry/react-select-input/react-select-input.tsx",
           "type": "registry:ui"
         }
       ]

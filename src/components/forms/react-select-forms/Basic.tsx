@@ -10,7 +10,7 @@ import {
   ReactSelect,
   convertToOptions,
   convertToOption,
-} from "@/registry/react-select/react-select";
+} from "@/registry/react-select-input/react-select-input";
 import { options, groupedOptions } from "@/data/options";
 
 const formSchema = z.object({
