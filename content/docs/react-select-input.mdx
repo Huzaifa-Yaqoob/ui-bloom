@@ -14,6 +14,20 @@ import config from "config.ts";
 
 ## Installation
 
+Add this in your global css file.
+
+```css
+/* no scroll bar for react-select input field */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+```
+
 {<PackageInstall name={"react-select-input"}/>}
 
 ## Preview
