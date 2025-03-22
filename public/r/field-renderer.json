@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "src/registry/field-renderer/field-renderer.tsx",
-      "content": "import {\r\n  FormControl,\r\n  FormDescription,\r\n  FormItem,\r\n  FormLabel,\r\n  FormMessage,\r\n} from \"@/components/ui/form\";\r\n\r\nexport default function FieldRenderer({\r\n  label,\r\n  description,\r\n  children,\r\n}: {\r\n  label?: React.ReactNode;\r\n  description?: React.ReactNode;\r\n  children: React.ReactNode;\r\n}) {\r\n  return (\r\n    <FormItem>\r\n      {label && <FormLabel>{label}</FormLabel>}\r\n      <FormControl>{children}</FormControl>\r\n      {description && <FormDescription>{description}</FormDescription>}\r\n      <FormMessage />\r\n    </FormItem>\r\n  );\r\n}\r\n",
+      "content": "import {\r\n  FormControl,\r\n  FormDescription,\r\n  FormItem,\r\n  FormLabel,\r\n  FormMessage,\r\n} from \"@/components/ui/form\";\r\n\r\nexport function FieldRenderer({\r\n  label,\r\n  description,\r\n  children,\r\n}: {\r\n  label?: React.ReactNode;\r\n  description?: React.ReactNode;\r\n  children: React.ReactNode;\r\n}) {\r\n  return (\r\n    <FormItem>\r\n      {label && <FormLabel>{label}</FormLabel>}\r\n      <FormControl>{children}</FormControl>\r\n      {description && <FormDescription>{description}</FormDescription>}\r\n      <FormMessage />\r\n    </FormItem>\r\n  );\r\n}\r\n",
       "type": "registry:ui"
     }
   ]

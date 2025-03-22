@@ -6,7 +6,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-export default function FieldRenderer({
+export function FieldRenderer({
   label,
   description,
   children,

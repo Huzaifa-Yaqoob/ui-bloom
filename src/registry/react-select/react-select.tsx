@@ -1,6 +1,6 @@
 "use client";
 
-import { InputHTMLAttributes, ComponentProps } from "react";
+import { ComponentProps } from "react";
 import { X, ChevronDown, Loader } from "lucide-react";
 import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
@@ -55,7 +55,6 @@ const customClassNames = {
   valueContainer: "flex gap-2",
   multiValueRemove: "ml-1",
   groupHeading: "text-sm text-muted-foreground",
-  loadingIndicator: "animate-spin",
   areaInvalid:
     "focus-visible:ring-destructive/20 border-destructive dark:ring-destructive/40 focus-within:ring-destructive/20 focus-within:border-destructive dark:focus-within:ring-destructive/40",
   areaValid: "focus-visible:border-ring focus-visible:ring-ring/50",
@@ -80,7 +79,6 @@ function ReactSelect({
     valueContainer,
     multiValueRemove,
     groupHeading,
-    loadingIndicator,
     ...otherClasses
   } = classNames;
 
@@ -140,11 +138,6 @@ function ReactSelect({
           cn(customClassNames.multiValue, multiValueRemove?.(props) && ""),
         groupHeading: (props) =>
           cn(customClassNames.groupHeading, groupHeading?.(props) ?? ""),
-        loadingIndicator: (props) =>
-          cn(
-            customClassNames.loadingIndicator,
-            loadingIndicator?.(props) ?? ""
-          ),
         ...otherClasses,
       }}
     />
@@ -229,11 +222,6 @@ function ReactAsyncSelect({
           cn(customClassNames.multiValue, multiValueRemove?.(props) && ""),
         groupHeading: (props) =>
           cn(customClassNames.groupHeading, groupHeading?.(props) ?? ""),
-        loadingIndicator: (props) =>
-          cn(
-            customClassNames.loadingIndicator,
-            loadingIndicator?.(props) ?? ""
-          ),
         ...otherClasses,
       }}
     />
@@ -258,7 +246,6 @@ function ReactCreatableSelect({
     valueContainer,
     multiValueRemove,
     groupHeading,
-    loadingIndicator,
     ...otherClasses
   } = classNames;
 
@@ -318,11 +305,6 @@ function ReactCreatableSelect({
           cn(customClassNames.multiValue, multiValueRemove?.(props) && ""),
         groupHeading: (props) =>
           cn(customClassNames.groupHeading, groupHeading?.(props) ?? ""),
-        loadingIndicator: (props) =>
-          cn(
-            customClassNames.loadingIndicator,
-            loadingIndicator?.(props) ?? ""
-          ),
         ...otherClasses,
       }}
     />
@@ -347,7 +329,6 @@ function ReactAsyncCreatableSelect({
     valueContainer,
     multiValueRemove,
     groupHeading,
-    loadingIndicator,
     ...otherClasses
   } = classNames;
 
@@ -407,11 +388,6 @@ function ReactAsyncCreatableSelect({
           cn(customClassNames.multiValue, multiValueRemove?.(props) && ""),
         groupHeading: (props) =>
           cn(customClassNames.groupHeading, groupHeading?.(props) ?? ""),
-        loadingIndicator: (props) =>
-          cn(
-            customClassNames.loadingIndicator,
-            loadingIndicator?.(props) ?? ""
-          ),
         ...otherClasses,
       }}
     />
@@ -442,12 +418,7 @@ function CustomDropdownIndicator(props: DropdownIndicatorProps) {
 }
 
 function CustomLoadingIndicator(props: LoadingIndicatorProps) {
-  const { className } = props;
-  return (
-    <div {...props}>
-      <Loader size={18} />
-    </div>
-  );
+  return <Loader size={18} className="animate-spin" />;
 }
 
 function CustomMultiValueRemove(props: MultiValueRemoveProps) {
@@ -474,16 +445,28 @@ function flattenOptions(options: Exclude<MyOptions, undefined>): MyOption[] {
 }
 
 function convertToOptions(
-  values: string[],
+  value: string[],
   options: Exclude<MyOptions, undefined>,
   valueField: string = "value"
 ) {
   const flatOptions = flattenOptions(options);
-  const selectedOptions = values.map((v) => {
+  const selectedOptions = value.map((v) => {
     return flatOptions.filter((o) => o[valueField] === v)[0];
   });
 
   return selectedOptions;
+}
+
+function convertToOption(
+  value: string,
+  options: Exclude<MyOptions, undefined>,
+  valueField: string = "value"
+) {
+  if (!value) {
+    return { [valueField]: "", label: "" };
+  }
+  const flatOptions = flattenOptions(options);
+  return flatOptions.filter((o) => o[valueField] === value)[0];
 }
 
 function getFields(field: string, selectedOptions: MyOption[] | undefined) {
@@ -495,11 +478,13 @@ function getFields(field: string, selectedOptions: MyOption[] | undefined) {
 
 export {
   ReactSelect,
-  convertToOptions,
-  getFields,
   ReactAsyncSelect,
   ReactCreatableSelect,
   ReactAsyncCreatableSelect,
+  convertToOptions,
+  getFields,
+  flattenOptions,
+  convertToOption,
   type MyOption,
   type MyOptions,
 };

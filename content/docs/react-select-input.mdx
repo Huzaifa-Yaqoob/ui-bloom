@@ -1,0 +1,105 @@
+---
+title: "React Select Input"
+description: "A customizable select component built with react-select that integrates seamlessly with shadcn/ui, supporting multi-select, form validation, and dynamic option creation."
+---
+
+import { AsyncForm } from "@/components/forms/react-select-forms/Async";
+import { BasicForm } from "@/components/forms/react-select-forms/Basic";
+import { CreatableForm } from "@/components/forms/react-select-forms/Creatable";
+import { AsyncCreatableForm } from "@/components/forms/react-select-forms/AsyncCreatable";
+import PackageInstall from "@/components/docs/PackageInstall";
+import PreviewTabs from "@/components/docs/PreviewTabs";
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import config from "config.ts";
+
+## Installation
+
+{<PackageInstall name={"react-select-input"}/>}
+
+## Preview
+
+#### Simple Select Component
+
+{<PreviewTabs component={<BasicForm />} fileUrl={"/components/forms/react-select-forms/Basic.tsx"} name={"react-select-input"}/>}
+
+#### Async Select Component
+
+{<PreviewTabs component={<AsyncForm />} fileUrl={"/components/forms/react-select-forms/Async.tsx"} name={"react-select-input"}/>}
+
+#### Creatable Select Component
+
+{<PreviewTabs component={<CreatableForm />} fileUrl={"/components/forms/react-select-forms/Creatable.tsx"} name={"react-select-input"}/>}
+
+#### Async Creatable Select Component
+
+{<PreviewTabs component={<AsyncCreatableForm />} fileUrl={"/components/forms/react-select-forms/AsyncCreatable.tsx"} name={"react-select-input"}/>}
+
+## Usage
+
+```tsx
+import { ReactSelect } from "@/components/ui/react-select-input";
+```
+
+```tsx
+// Simple without form
+<ReactSelect options={groupedOptions} {...field} />
+```
+
+```tsx
+// In form
+<FormField
+  control={form.control}
+  name="password"
+  render={({ field }) => (
+    <FieldRenderer label="Password">
+      <ReactSelect options={groupedOptions} {...field} />
+    </FieldRenderer>
+  )}
+/>
+```
+
+## Helper Functions
+
+These functions help manipulate and transform options in a structured way.
+
+### `flattenOptions`
+
+Flattens a nested options structure into a single-level array.
+
+```tsx
+import { flattenOptions } from "@/components/ui/react-select-input";
+```
+
+### `convertToOption`
+
+Retrieves an option object based on a given string value and an array of options. This function is particularly useful for setting the default value or selected value in a single-select input.
+
+```tsx
+import { convertToOption } from "@/components/ui/react-select-input";
+```
+
+### `convertToOptions`
+
+Get an array of string and array of options and return the array of option object to use in default value or value use if select accepts multiple value.
+
+```tsx
+import { convertToOptions } from "@/components/ui/react-select-input";
+```
+
+### `getFields`
+
+Extracts a specific field from an array of selected option objects. This function is useful when only a particular property of the selected options is required.
+
+```tsx
+import { getFields } from "@/components/ui/react-select-input";
+```
+
+<Callout title="Usage Restriction">
+  The default value in select component for single select must be an object `{[valueField]:"", label:"}` you can get it using `convertToOption` functions this way your `form.reset` function will work properly and for multi select default value must be an empty array.
+</Callout>
+
+## Dependencies
+
+This component depends on the `react-select` library.
+
+[View react-select Documentation](https://react-select.com/home)

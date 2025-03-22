@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 import { OpenInV0 } from "./OpenInV0";
+import PreviewWrapper from "../common/preview-wrapper";
 
 export default function PreviewTabs({
   component,
@@ -51,7 +52,7 @@ export default function PreviewTabs({
         <OpenInV0 name={name} />
       </div>
       {isUi ? (
-        <>{component}</>
+        <PreviewWrapper>{component}</PreviewWrapper>
       ) : (
         <DynamicCodeBlock lang="typescript" code={componentSourceCode} />
       )}
