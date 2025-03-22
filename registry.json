@@ -17,7 +17,8 @@
         {
           "path": "src/registry/password-input/password.css",
           "type": "registry:file",
-          "target": "app/global.css"
+          "target": "app/global.css",
+          "append": true
         }
       ]
     },
@@ -48,7 +49,8 @@
         {
           "path": "src/registry/react-select/reactSelect.css",
           "type": "registry:file",
-          "target": "app/global.css"
+          "target": "app/global.css",
+          "append": true
         }
       ]
     }
