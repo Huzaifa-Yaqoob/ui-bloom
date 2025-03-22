@@ -10,7 +10,6 @@ import {
   ClearIndicatorProps,
   components,
   DropdownIndicatorProps,
-  LoadingIndicatorProps,
   MultiValueRemoveProps,
 } from "react-select";
 
@@ -162,7 +161,6 @@ function ReactAsyncSelect({
     valueContainer,
     multiValueRemove,
     groupHeading,
-    loadingIndicator,
     ...otherClasses
   } = classNames;
 
@@ -417,7 +415,7 @@ function CustomDropdownIndicator(props: DropdownIndicatorProps) {
   );
 }
 
-function CustomLoadingIndicator(props: LoadingIndicatorProps) {
+function CustomLoadingIndicator() {
   return <Loader size={18} className="animate-spin" />;
 }
 

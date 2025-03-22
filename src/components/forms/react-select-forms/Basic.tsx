@@ -14,7 +14,10 @@ import {
 import { options, groupedOptions } from "@/data/options";
 
 const formSchema = z.object({
-  color: z.any(),
+  color: z.object({
+    value: z.string(),
+    label: z.string(),
+  }),
   color2: z
     .array(
       z.object({
