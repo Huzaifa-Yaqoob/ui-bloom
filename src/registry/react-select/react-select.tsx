@@ -29,7 +29,7 @@ const AsyncCreatableSelect = dynamic(
 );
 
 interface MyOption {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 type MyOptions = OptionsOrGroups<MyOption, GroupBase<MyOption>> | undefined;
 type ReactSelectProps = ComponentProps<typeof Select>;
@@ -433,13 +433,13 @@ const map = new Map();
 function flattenOptions(options: Exclude<MyOptions, undefined>): MyOption[] {
   const jsonOptions = JSON.stringify(options);
   if (map.has(jsonOptions)) {
-    return map.get(jsonOptions);
+    return map.get(jsonOptions) as MyOption[];
   }
   const flatOptions = options.flatMap((option) =>
     option.options ? option.options : option
   );
   map.set(jsonOptions, flatOptions);
-  return flatOptions;
+  return flatOptions as MyOption[];
 }
 
 function convertToOptions(

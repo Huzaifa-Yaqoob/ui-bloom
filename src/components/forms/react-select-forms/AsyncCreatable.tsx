@@ -32,9 +32,12 @@ const formSchema = z.object({
 
 const filterOptions = (inputValue: string) => {
   const options = flattenOptions(groupedOptions);
-  return options.filter((i) =>
-    i.label.toLowerCase().includes(inputValue.toLowerCase())
-  );
+  return options.filter((i) => {
+    if (typeof i.label === "string") {
+      return i.label.toLowerCase().includes(inputValue.toLowerCase());
+    }
+    return;
+  });
 };
 
 const promiseOptions = (inputValue: string) =>
