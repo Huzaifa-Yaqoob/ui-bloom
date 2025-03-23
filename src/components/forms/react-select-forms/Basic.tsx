@@ -14,10 +14,7 @@ import {
 import { options, groupedOptions } from "@/data/options";
 
 const formSchema = z.object({
-  color: z.object({
-    value: z.string(),
-    label: z.string(),
-  }),
+  color: z.any(),
   color2: z
     .array(
       z.object({
@@ -33,7 +30,7 @@ export function BasicForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      color: convertToOption("", options),
+      color: null,
       color2: convertToOptions(["smoothie", "juice"], groupedOptions),
     },
   });
@@ -74,7 +71,7 @@ export function BasicForm() {
           <Button
             type="button"
             onClick={() => {
-              form.reset();
+              form.reset({ color: undefined });
             }}
           >
             Reset

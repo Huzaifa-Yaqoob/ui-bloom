@@ -461,7 +461,7 @@ function convertToOption(
   valueField: string = "value"
 ) {
   if (!value) {
-    return { [valueField]: "", label: "" };
+    return null;
   }
   const flatOptions = flattenOptions(options);
   return flatOptions.filter((o) => o[valueField] === value)[0];

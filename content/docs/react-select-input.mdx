@@ -109,7 +109,10 @@ import { getFields } from "@/components/ui/react-select-input";
 ```
 
 <Callout title="Usage Restriction">
-  The default value in select component for single select must be an object `{[valueField]:"", label:"}` you can get it using `convertToOption` functions this way your `form.reset` function will work properly and for multi select default value must be an empty array.
+  The default value in select component for single select must be an object
+  `null` you can get it using `convertToOption` functions this way your
+  `form.reset` function will work properly and for multi select default value
+  must be an empty array.
 </Callout>
 
 ## Dependencies
