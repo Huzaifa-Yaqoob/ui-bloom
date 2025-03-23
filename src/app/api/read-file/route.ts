@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import readFileContent from "@/lib/readFile";
 
 export async function GET(req: Request) {
+  console.log("sasa");
   const { searchParams } = new URL(req.url);
   const filePath = searchParams.get("file");
 
