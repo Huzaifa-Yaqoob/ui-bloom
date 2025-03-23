@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <DocsLayout
       tree={source.pageTree}
       {...baseOptionNoLinks}
-      githubUrl="https://github.com/Huzaifa-Yaqoob"
+      githubUrl="https://github.com/Huzaifa-Yaqoob/ui-bloom"
     >
       {children}
     </DocsLayout>
