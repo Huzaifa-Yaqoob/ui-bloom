@@ -2,11 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,12 +16,8 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/.source": [
-        "./.source/index.ts"
-      ],
-      "@/*": [
-        "./src/*"
-      ]
+      "@/.source": ["./.source/index.ts"],
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {
@@ -37,9 +29,14 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/components/code/forms/react-select-forms/CreatableCode.tsx",
+    "src/components/code/forms/react-select-forms/BasicCode.tsx",
+    "src/components/code/forms/react-select-forms/AsyncCreatableCode.tsx",
+    "src/components/code/forms/react-select-forms/Async.tsx",
+    "src/components/code/forms/react-select-form.mdx",
+    "src/components/code/forms/password-input-code.tsx",
+    "src/components/code/forms/field-renderer-form.tsx"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

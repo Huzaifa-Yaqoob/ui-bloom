@@ -7,6 +7,10 @@ import { AsyncForm } from "@/components/forms/react-select-forms/Async";
 import { BasicForm } from "@/components/forms/react-select-forms/Basic";
 import { CreatableForm } from "@/components/forms/react-select-forms/Creatable";
 import { AsyncCreatableForm } from "@/components/forms/react-select-forms/AsyncCreatable";
+import AsyncFormCode from "@/components/code/forms/react-select-forms/AsyncCode";
+import BasicFormCode from "@/components/code/forms/react-select-forms/BasicCode";
+import CreatableFormCode from "@/components/code/forms/react-select-forms/CreatableCode";
+import AsyncCreatableFormCode from "@/components/code/forms/react-select-forms/AsyncCreatableCode";
 import PackageInstall from "@/components/docs/PackageInstall";
 import PreviewTabs from "@/components/docs/PreviewTabs";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
@@ -34,19 +38,19 @@ Add this in your global css file.
 
 #### Simple Select Component
 
-{<PreviewTabs component={<BasicForm />} fileUrl={"/components/forms/react-select-forms/Basic.tsx"} name={"react-select-input"}/>}
+{<PreviewTabs component={<BasicForm />} code={BasicFormCode} name={"react-select-input"}/>}
 
 #### Async Select Component
 
-{<PreviewTabs component={<AsyncForm />} fileUrl={"/components/forms/react-select-forms/Async.tsx"} name={"react-select-input"}/>}
+{<PreviewTabs component={<AsyncForm />} code={AsyncFormCode} name={"react-select-input"}/>}
 
 #### Creatable Select Component
 
-{<PreviewTabs component={<CreatableForm />} fileUrl={"/components/forms/react-select-forms/Creatable.tsx"} name={"react-select-input"}/>}
+{<PreviewTabs component={<CreatableForm />} code={CreatableFormCode} name={"react-select-input"}/>}
 
 #### Async Creatable Select Component
 
-{<PreviewTabs component={<AsyncCreatableForm />} fileUrl={"/components/forms/react-select-forms/AsyncCreatable.tsx"} name={"react-select-input"}/>}
+{<PreviewTabs component={<AsyncCreatableForm />} code={AsyncCreatableFormCode} name={"react-select-input"}/>}
 
 ## Usage
 

@@ -6,7 +6,8 @@ description: "A wrapper around the Input field that helps reduce the lines of co
 import FieldRendererForm from "@/components/forms/field-renderer-form";
 import PackageInstall from "@/components/docs/PackageInstall";
 import PreviewTabs from "@/components/docs/PreviewTabs";
-import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import code from "@/components/code/forms/field-renderer-form-code";
+
 import config from "config.ts";
 
 <Callout title="Usage Restriction">
@@ -19,7 +20,7 @@ import config from "config.ts";
 
 ## Preview
 
-{<PreviewTabs component={<FieldRendererForm />} fileUrl={"/components/forms/field-renderer-form.tsx"} name={"field-renderer"}/>}
+{<PreviewTabs component={<FieldRendererForm />} code={code} name={"field-renderer"}/>}
 
 ## Usage
 

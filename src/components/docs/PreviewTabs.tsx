@@ -1,28 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 import { OpenInV0 } from "./OpenInV0";
 import PreviewWrapper from "../common/preview-wrapper";
 
 export default function PreviewTabs({
   component,
-  fileUrl,
+  code,
   name,
 }: {
   component: React.ReactNode;
-  fileUrl: string;
+  code: string;
   name: string;
 }) {
   const [isUi, setIsUi] = useState(true);
-  const [componentSourceCode, setComponentSourceCode] = useState("");
-
-  useEffect(() => {
-    fetch(`/api/read-file?file=${encodeURIComponent("src/" + fileUrl)}`)
-      .then((res) => res.json())
-      .then((data) => setComponentSourceCode(data.content))
-      .catch(() => setComponentSourceCode("Error loading file content."));
-  }, [fileUrl]);
 
   return (
     <div className="space-y-4">
@@ -54,7 +46,7 @@ export default function PreviewTabs({
       {isUi ? (
         <PreviewWrapper>{component}</PreviewWrapper>
       ) : (
-        <DynamicCodeBlock lang="typescript" code={componentSourceCode} />
+        <DynamicCodeBlock lang="typescript" code={code} />
       )}
     </div>
   );
