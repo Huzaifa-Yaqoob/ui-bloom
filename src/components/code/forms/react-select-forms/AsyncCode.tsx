@@ -1,5 +1,3 @@
-import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
-
 export default `"use client";
 
 import { z } from "zod";
