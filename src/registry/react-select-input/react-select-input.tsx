@@ -48,6 +48,7 @@ const customClassNames = {
   clearIndicator:
     "text-destructive/50 hover:text-destructive/80 cursor-pointer",
   option: "hover:bg-accent-foreground/50 p-1 rounded",
+  focusedOption: "bg-accent-foreground/50",
   selectedOption: "bg-accent-foreground text-accent",
   dropdownIndicator: "text-foreground/50 cursor-pointer",
   multiValue: "bg-accent px-1 rounded-sm",
@@ -120,6 +121,7 @@ function ReactSelect({
           cn(
             customClassNames.option,
             props.isSelected ? customClassNames.selectedOption : "",
+            props.isFocused ? customClassNames.focusedOption : "",
             option?.(props) && ""
           ),
         dropdownIndicator: (props) =>
@@ -203,6 +205,7 @@ function ReactAsyncSelect({
           cn(
             customClassNames.option,
             props.isSelected ? customClassNames.selectedOption : "",
+            props.isFocused ? customClassNames.focusedOption : "",
             option?.(props) && ""
           ),
         dropdownIndicator: (props) =>
@@ -286,6 +289,7 @@ function ReactCreatableSelect({
           cn(
             customClassNames.option,
             props.isSelected ? customClassNames.selectedOption : "",
+            props.isFocused ? customClassNames.focusedOption : "",
             option?.(props) && ""
           ),
         dropdownIndicator: (props) =>
@@ -369,6 +373,7 @@ function ReactAsyncCreatableSelect({
           cn(
             customClassNames.option,
             props.isSelected ? customClassNames.selectedOption : "",
+            props.isFocused ? customClassNames.focusedOption : "",
             option?.(props) && ""
           ),
         dropdownIndicator: (props) =>
