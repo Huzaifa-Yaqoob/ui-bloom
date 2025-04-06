@@ -18,8 +18,13 @@ export const baseOptions: BaseLayoutProps = {
   },
   links: [
     {
-      text: "Components",
+      text: "How To use",
       url: "/docs",
+      active: "nested-url",
+    },
+    {
+      text: "Components",
+      url: "/docs/field-renderer",
       active: "nested-url",
     },
   ],
