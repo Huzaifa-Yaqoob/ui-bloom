@@ -9,6 +9,7 @@ import { FieldRenderer } from "@/registry/field-renderer/field-renderer";
 import {
   DropzoneProvider,
   DropArea,
+  PreviewArea,
 } from "@/registry/react-dropzone-input/react-dropzone-input";
 
 const formSchema = z.object({
@@ -20,7 +21,7 @@ export default function DropzoneForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      file: undefined,
+      file: [],
     },
   });
 
@@ -45,16 +46,29 @@ export default function DropzoneForm() {
               <DropzoneProvider options={{ multiple: true }}>
                 <DropArea
                   unstyled={true}
-                  {...field}
-                  renderer={({}) => {
+                  field={field}
+                  name="file"
+                  renderer={() => {
                     return <div className="">Click to select file.</div>;
                   }}
                 />
+                <PreviewArea />
               </DropzoneProvider>
             </FieldRenderer>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="flex gap-4">
+          <Button type="submit">Submit</Button>
+          <Button
+            type="reset"
+            variant={"outline"}
+            onClick={() => {
+              form.reset();
+            }}
+          >
+            Reset
+          </Button>
+        </div>
       </form>
     </Form>
   );

@@ -1,10 +1,14 @@
 "use client";
 
 import React, { createContext, useContext } from "react";
+import { ControllerRenderProps, FieldPath, FieldValues } from "react-hook-form";
+import { FileText, FileMusic } from "lucide-react";
 import { useDropzone, DropzoneState, DropzoneOptions } from "react-dropzone";
 import { cn } from "@/lib/utils";
 
-export const DropzoneContext = createContext<DropzoneState | null>(null);
+export const DropzoneContext = createContext<{
+  dropzoneProps: DropzoneState;
+} | null>(null);
 
 function useDropzoneContext() {
   const context = useContext(DropzoneContext);
@@ -14,44 +18,72 @@ function useDropzoneContext() {
   return context;
 }
 
-function DropzoneProvider({
-  options = {},
-  children,
-}: {
+interface DropzoneProviderProps {
   children: React.ReactNode;
   options?: DropzoneOptions;
-}) {
+}
+
+function DropzoneProvider({ options = {}, children }: DropzoneProviderProps) {
   const dropzoneProps = useDropzone(options);
+  const [acceptedFiles, setAcceptedFiles] = React.useState([]);
 
   return (
-    <DropzoneContext.Provider value={dropzoneProps}>
+    <DropzoneContext.Provider value={{ dropzoneProps }}>
       {children}
     </DropzoneContext.Provider>
   );
 }
 
-function DropArea({
+interface DropAreaProps<T extends FieldValues, K extends FieldPath<T>> {
+  unstyled: boolean;
+  field: ControllerRenderProps<T, K>;
+  name: K;
+  renderer: (
+    props: Omit<DropzoneState, "getRootProps" | "getInputProps" | "inputRef">
+  ) => React.ReactNode;
+}
+
+function DropArea<T extends FieldValues, K extends FieldPath<T>>({
   unstyled = false,
   renderer,
-}: {
-  unstyled?: boolean;
-  renderer: (
-    props: Omit<DropzoneState, "getRootProps" | "getInputProps">
-  ) => React.ReactNode;
-}) {
-  const { getRootProps, getInputProps, ...props } = useDropzoneContext();
+  field,
+}: DropAreaProps<T, K>) {
+  const { getRootProps, getInputProps, inputRef, ...props } =
+    useDropzoneContext().dropzoneProps;
+
+  React.useEffect(() => {
+    if (
+      !field.value ||
+      (field.value.length === 0 && inputRef?.current?.files)
+    ) {
+      inputRef.current.value = "";
+      props.acceptedFiles = [];
+      console.log("1asas");
+    }
+    console.log("asas");
+  }, [field.value, props.acceptedFiles]);
 
   return (
     <div {...getRootProps()} className={unstyled ? "" : "bg-muted p-2"}>
-      <input {...getInputProps()} />
+      <input
+        {...getInputProps({
+          onChange: (event) => {
+            field.onChange(event.target.files);
+          },
+        })}
+      />
       {renderer(props)}
     </div>
   );
 }
 
 function PreviewArea() {
-  const { acceptedFiles } = useDropzoneContext();
-  return <></>;
+  const { dropzoneProps } = useDropzoneContext();
+  const { acceptedFiles } = dropzoneProps;
+
+  return <>{acceptedFiles.length}</>;
 }
+
+function ImagePreview({ file }: { file: File }) {}
 
 export { useDropzoneContext, DropzoneProvider, DropArea, PreviewArea };
