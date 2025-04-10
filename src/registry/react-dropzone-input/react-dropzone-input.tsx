@@ -39,7 +39,7 @@ interface DropAreaProps<T extends FieldValues, K extends FieldPath<T>> {
   field: ControllerRenderProps<T, K>;
   name: K;
   renderer: (
-    props: Omit<DropzoneState, "getRootProps" | "getInputProps" | "inputRef">
+    props: Omit<DropzoneState, "getRootProps" | "getInputProps">
   ) => React.ReactNode;
 }
 
@@ -48,7 +48,7 @@ function DropArea<T extends FieldValues, K extends FieldPath<T>>({
   renderer,
   field,
 }: DropAreaProps<T, K>) {
-  const { getRootProps, getInputProps, inputRef, ...props } =
+  const { getRootProps, getInputProps, ...props } =
     useDropzoneContext().dropzoneProps;
 
   // React.useEffect(() => {}, []);
