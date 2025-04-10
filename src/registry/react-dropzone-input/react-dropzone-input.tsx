@@ -2,9 +2,9 @@
 
 import React, { createContext, useContext } from "react";
 import { ControllerRenderProps, FieldPath, FieldValues } from "react-hook-form";
-import { FileText, FileMusic } from "lucide-react";
+// import { FileText, FileMusic } from "lucide-react";
 import { useDropzone, DropzoneState, DropzoneOptions } from "react-dropzone";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 
 export const DropzoneContext = createContext<{
   dropzoneProps: DropzoneState;
@@ -25,7 +25,7 @@ interface DropzoneProviderProps {
 
 function DropzoneProvider({ options = {}, children }: DropzoneProviderProps) {
   const dropzoneProps = useDropzone(options);
-  const [acceptedFiles, setAcceptedFiles] = React.useState([]);
+  // const [acceptedFiles, setAcceptedFiles] = React.useState([]);
 
   return (
     <DropzoneContext.Provider value={{ dropzoneProps }}>
@@ -51,17 +51,7 @@ function DropArea<T extends FieldValues, K extends FieldPath<T>>({
   const { getRootProps, getInputProps, inputRef, ...props } =
     useDropzoneContext().dropzoneProps;
 
-  React.useEffect(() => {
-    if (
-      !field.value ||
-      (field.value.length === 0 && inputRef?.current?.files)
-    ) {
-      inputRef.current.value = "";
-      props.acceptedFiles = [];
-      console.log("1asas");
-    }
-    console.log("asas");
-  }, [field.value, props.acceptedFiles]);
+  // React.useEffect(() => {}, []);
 
   return (
     <div {...getRootProps()} className={unstyled ? "" : "bg-muted p-2"}>
@@ -84,6 +74,12 @@ function PreviewArea() {
   return <>{acceptedFiles.length}</>;
 }
 
-function ImagePreview({ file }: { file: File }) {}
+// function ImagePreview({ file }: { file: File }) {}
 
-export { useDropzoneContext, DropzoneProvider, DropArea, PreviewArea };
+export {
+  useDropzoneContext,
+  DropzoneProvider,
+  DropArea,
+  PreviewArea,
+  // ImagePreview,
+};

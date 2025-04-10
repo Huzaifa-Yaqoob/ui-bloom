@@ -12,15 +12,15 @@ export default function HomePage() {
         </h3>
       </div>
       <div className="mx-4 md:mx-8 lg:mx-16 mt-8 text-center grow">
-        Say hello to UI Bloom — where components don't just work… they flourish
-        🌼. Built on top of the elegant Shadcn UI, and fine-tuned for the latest
-        and greatest — Next.js 15 and React 19 — this registry is like your
-        front-end playground, blooming with ready-to-pick components. Tired of
-        digging through clunky design systems or bloated UI kits? UI Bloom is
-        lightweight, flexible, and built for devs who like their code clean and
-        their UI crisp. From buttons that bounce with joy to cards that snap
-        into place, every component here is handpicked to save you time and
-        spark joy ✨.
+        Say hello to UI Bloom — where components don&apos;t just work… they
+        flourish 🌼. Built on top of the elegant Shadcn UI, and fine-tuned for
+        the latest and greatest — Next.js 15 and React 19 — this registry is
+        like your front-end playground, blooming with ready-to-pick components.
+        Tired of digging through clunky design systems or bloated UI kits? UI
+        Bloom is lightweight, flexible, and built for devs who like their code
+        clean and their UI crisp. From buttons that bounce with joy to cards
+        that snap into place, every component here is handpicked to save you
+        time and spark joy ✨.
       </div>
       <div className="mx-4 md:mx-8 lg:mx-16 flex items-center gap-4 mb-4">
         <a
