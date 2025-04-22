@@ -60,7 +60,18 @@ export default function DropzoneForm() {
             </FieldRenderer>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="flex gap-2">
+          <Button type="submit">Submit</Button>
+          <Button
+            type="button"
+            variant={"outline"}
+            onClick={() => {
+              form.reset();
+            }}
+          >
+            Reset
+          </Button>
+        </div>
       </form>
     </Form>
   );

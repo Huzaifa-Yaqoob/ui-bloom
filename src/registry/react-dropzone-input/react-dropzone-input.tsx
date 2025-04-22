@@ -67,6 +67,7 @@ function useDropzoneContext() {
 function DropzoneProvider({
   options = {},
   onChange,
+  value,
   children,
 }: DropZoneProviderProps) {
   const { onDrop, multiple, ...restProps } = options;
@@ -103,6 +104,12 @@ function DropzoneProvider({
   });
 
   const categorized = useMemo(() => categorizedFiles(files), [files]);
+
+  useEffect(() => {
+    if (!value) {
+      setFiles([]);
+    }
+  }, [value]);
 
   return (
     <DropzoneContext.Provider
