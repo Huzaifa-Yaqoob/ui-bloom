@@ -10,6 +10,9 @@ import {
   DropzoneProvider,
   DropArea,
   ImagesPreview,
+  VideosPreview,
+  PDFsPreview,
+  AudiosPreview,
 } from "@/registry/react-dropzone-input/react-dropzone-input";
 
 const formSchema = z.object({
@@ -51,6 +54,9 @@ export default function DropzoneForm() {
                   }}
                 />
                 <ImagesPreview />
+                <VideosPreview />
+                <PDFsPreview />
+                <AudiosPreview />
               </DropzoneProvider>
             </FieldRenderer>
           )}
