@@ -13,6 +13,8 @@ import {
   VideosPreview,
   PDFsPreview,
   AudiosPreview,
+  OtherFilesPreview,
+  PreviewAll,
 } from "@/registry/react-dropzone-input/react-dropzone-input";
 
 const formSchema = z.object({
@@ -53,10 +55,7 @@ export default function DropzoneForm() {
                     return <div className="">Click to select file.</div>;
                   }}
                 />
-                <ImagesPreview />
-                <VideosPreview />
-                <PDFsPreview />
-                <AudiosPreview />
+                <PreviewAll />
               </DropzoneProvider>
             </FieldRenderer>
           )}

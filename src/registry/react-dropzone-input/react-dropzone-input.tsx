@@ -17,7 +17,7 @@ import {
   FileRejection,
   DropEvent,
 } from "react-dropzone";
-import { X, Loader2, Play, File, Music } from "lucide-react";
+import { X, Loader2, Maximize, File, Music } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
@@ -34,8 +34,6 @@ export const DropzoneContext = createContext<{
   categorizedFiles: {
     images?: File[];
     pdfs?: File[];
-    wordDocs?: File[];
-    excelFiles?: File[];
     audioFiles?: File[];
     videoFiles?: File[];
     others?: File[];
@@ -136,18 +134,75 @@ function DropArea({ unstyled = false, renderer }: DropAreaProps) {
 }
 
 function PreviewAll() {
-  const { audioFiles } = useDropzoneContext().categorizedFiles;
-
+  const files = useDropzoneContext().files;
+  const { images, pdfs, audioFiles, videoFiles, others } =
+    useDropzoneContext().categorizedFiles;
   return (
     <div>
-      {audioFiles && audioFiles?.length > 0 && (
-        <FileCount fileType="Images" count={audioFiles.length} />
-      )}
+      <div className="flex gap-2 flex-wrap">
+        {files && files?.length > 0 && (
+          <FileCount fileType="All" count={files.length} />
+        )}
+        {images && images?.length > 0 && (
+          <FileCount fileType="Images" count={images.length} />
+        )}
+        {videoFiles && videoFiles?.length > 0 && (
+          <FileCount fileType="Videos" count={videoFiles.length} />
+        )}
+        {audioFiles && audioFiles?.length > 0 && (
+          <FileCount fileType="Audios" count={audioFiles.length} />
+        )}
+        {pdfs && pdfs?.length > 0 && (
+          <FileCount fileType="PDFs" count={pdfs.length} />
+        )}
+        {others && others?.length > 0 && (
+          <FileCount fileType="Others" count={others.length} />
+        )}
+      </div>
       <PreviewWrapper>
-        <AllAudios audios={audioFiles} />
+        <AllPreviewAll files={files} />
       </PreviewWrapper>
     </div>
   );
+}
+
+function AllPreviewAll({ files }: { files: File[] | undefined }) {
+  return (
+    <>
+      {files && files.length > 0
+        ? files.map((file, index) => (
+            <PreviewAllItem key={index + file.name} file={file} />
+          ))
+        : "All selected files will be shown here."}
+    </>
+  );
+}
+
+function PreviewAllItem({ file }: { file: File }) {
+  const type = file.type.toLowerCase();
+  const name = file.name.toLowerCase();
+
+  if (type.startsWith("image/")) {
+    return <ImagesPreviewItem image={file} />;
+  } else if (type === "application/pdf" || name.endsWith(".pdf")) {
+    return <PDFPreviewItem pdf={file} />;
+  } else if (
+    type.startsWith("audio/") ||
+    name.endsWith(".mp3") ||
+    name.endsWith(".wav") ||
+    name.endsWith(".ogg")
+  ) {
+    return <AudioPreviewItem audio={file} />;
+  } else if (
+    type.startsWith("video/") ||
+    name.endsWith(".mp4") ||
+    name.endsWith(".mov") ||
+    name.endsWith(".avi")
+  ) {
+    return <VideoPreviewItem video={file} />;
+  } else {
+    return <OtherFilePreviewItem other={file} />;
+  }
 }
 
 // For Images Preview
@@ -208,9 +263,10 @@ function ImagesPreviewItem({ image }: { image: File }) {
               src={preview}
               alt={image.name}
               className="object-cover w-full h-full"
-              onLoad={handleImageLoad} // Trigger loading state change when image loads
+              onLoad={handleImageLoad}
             />
             <RemoveFileButton file={image} />
+            <OpenImageDialog image={image} />
           </div>
           <div className="text-xs text-center">
             {formatFileName(image.name)}
@@ -218,6 +274,45 @@ function ImagesPreviewItem({ image }: { image: File }) {
         </div>
       )}
     </>
+  );
+}
+
+function OpenImageDialog({ image }: { image: File }) {
+  const [imageURL, setImageURL] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const url = URL.createObjectURL(image);
+    setImageURL(url);
+
+    return () => URL.revokeObjectURL(url);
+  }, [image]);
+
+  const handleLoad = () => {
+    setIsLoading(false);
+  };
+
+  return (
+    <Dialog>
+      <OpenDialogButton />
+      <DialogContent className="max-w-4xl">
+        <DialogHeader>
+          <DialogTitle>{image.name}</DialogTitle>
+        </DialogHeader>
+        <div className="flex items-center justify-center">
+          {isLoading && <Loader2 className="animate-spin" />}
+          {imageURL && (
+            <img
+              ref={imageRef}
+              src={imageURL}
+              onLoad={handleLoad}
+              className="w-auto max-h-96 rounded-lg"
+            />
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -370,9 +465,7 @@ function PlayVideoDialog({ video }: { video: File }) {
 
   return (
     <Dialog>
-      <DialogTrigger className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent-foreground text-accent rounded-full p-1 text-xs cursor-pointer shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100">
-        <Play size={18} />
-      </DialogTrigger>
+      <OpenDialogButton />
       <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle>{video.name}</DialogTitle>
@@ -453,9 +546,7 @@ function PlayAudioDialog({ audio }: { audio: File }) {
 
   return (
     <Dialog>
-      <DialogTrigger className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent-foreground text-accent rounded-full p-1 text-xs cursor-pointer shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100">
-        <Play size={18} />
-      </DialogTrigger>
+      <OpenDialogButton />
       <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle>{audio.name}</DialogTitle>
@@ -507,12 +598,58 @@ function AllPDFs({ pdfs }: { pdfs: File[] | undefined }) {
 
 function PDFPreviewItem({ pdf }: { pdf: File }) {
   return (
-    <div className="bg-muted p-1 rounded">
+    <div className="bg-muted p-1 rounded group">
       <div className="relative w-36 h-24 rounded overflow-hidden shadow bg-muted">
-        <FormatFileIcon fileType="PDF" className="bg-red-200 text-red-600" />
+        <FormatFileIcon
+          fileType="PDF"
+          className="bg-red-200 text-red-600"
+          extClassName="bg-red-200"
+        />
         <RemoveFileButton file={pdf} />
       </div>
       <div className="text-xs text-center">{formatFileName(pdf.name)}</div>
+    </div>
+  );
+}
+
+// For Excel Files
+function OtherFilesPreview() {
+  const { others } = useDropzoneContext().categorizedFiles;
+  return (
+    <div>
+      {others && others?.length > 0 && (
+        <FileCount fileType="Excel Files" count={others.length} />
+      )}
+      <PreviewWrapper>
+        <AllOthersFiles others={others} />
+      </PreviewWrapper>
+    </div>
+  );
+}
+
+function AllOthersFiles({ others }: { others: File[] | undefined }) {
+  return (
+    <>
+      {others && others.length > 0
+        ? others.map((other, index) => (
+            <OtherFilePreviewItem key={index + other.name} other={other} />
+          ))
+        : "All other files will be shown here."}
+    </>
+  );
+}
+
+function OtherFilePreviewItem({ other }: { other: File }) {
+  return (
+    <div className="bg-muted p-1 rounded group">
+      <div className="relative w-36 h-24 rounded overflow-hidden shadow bg-muted">
+        <FormatFileIcon
+          fileType={other.name.split(".").pop()?.toUpperCase() || "N/A"}
+          className="bg-accent-foreground text-accent"
+        />
+        <RemoveFileButton file={other} />
+      </div>
+      <div className="text-xs text-center">{formatFileName(other.name)}</div>
     </div>
   );
 }
@@ -522,6 +659,14 @@ function FileCount({ fileType, count }: { fileType: string; count: number }) {
     <p className="mb-4">
       {fileType}: <b>{count}</b>
     </p>
+  );
+}
+
+function OpenDialogButton() {
+  return (
+    <DialogTrigger className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-accent-foreground rounded-full p-1 text-xs cursor-pointer shadow-lg opacity-0 group-hover:opacity-75 transition-opacity duration-100">
+      <Maximize size={18} />
+    </DialogTrigger>
   );
 }
 
@@ -549,14 +694,23 @@ function PreviewWrapper({ children }: { children: React.ReactNode }) {
 function FormatFileIcon({
   fileType,
   className = "",
+  extClassName = "",
 }: {
   fileType: string;
   className?: string;
+  extClassName?: string;
 }) {
   return (
     <div className={cn("h-full flex items-center justify-center", className)}>
       <File size={64} />
-      <div className="absolute font-bold">{fileType}</div>
+      <div
+        className={cn(
+          "absolute font-bold bg-accent-foreground px-1 rounded shadow-2xl",
+          extClassName
+        )}
+      >
+        {fileType}
+      </div>
     </div>
   );
 }
@@ -579,8 +733,6 @@ function formatFileName(filename: string) {
 function categorizedFiles(files: File[]) {
   const images: File[] = [];
   const pdfs: File[] = [];
-  const wordDocs: File[] = [];
-  const excelFiles: File[] = [];
   const audioFiles: File[] = [];
   const videoFiles: File[] = [];
   const others: File[] = [];
@@ -593,22 +745,6 @@ function categorizedFiles(files: File[]) {
       images.push(file);
     } else if (type === "application/pdf" || name.endsWith(".pdf")) {
       pdfs.push(file);
-    } else if (
-      name.endsWith(".doc") ||
-      name.endsWith(".docx") ||
-      type === "application/msword" ||
-      type ===
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ) {
-      wordDocs.push(file);
-    } else if (
-      name.endsWith(".xls") ||
-      name.endsWith(".xlsx") ||
-      type === "application/vnd.ms-excel" ||
-      type ===
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    ) {
-      excelFiles.push(file);
     } else if (
       type.startsWith("audio/") ||
       name.endsWith(".mp3") ||
@@ -631,8 +767,6 @@ function categorizedFiles(files: File[]) {
   return {
     images,
     pdfs,
-    wordDocs,
-    excelFiles,
     audioFiles,
     videoFiles,
     others,
@@ -648,4 +782,5 @@ export {
   VideosPreview,
   PDFsPreview,
   AudiosPreview,
+  OtherFilesPreview,
 };
