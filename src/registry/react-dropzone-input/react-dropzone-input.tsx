@@ -47,6 +47,7 @@ interface DropZoneProviderProps {
   onBlur?: () => void;
   children: React.ReactNode;
   options?: DropzoneOptions;
+  defaultValue?: string[];
 }
 
 interface DropAreaProps {
@@ -73,16 +74,19 @@ function DropzoneProvider({
   const { onDrop, multiple, ...restProps } = options;
   const [files, setFiles] = useState<File[]>([]);
 
-  const onDropC = useCallback((acceptedFiles: File[]) => {
-    let newFiles: File[] = [];
-    if (multiple) {
-      newFiles = [...files, ...acceptedFiles];
-    } else {
-      newFiles = acceptedFiles[0] ? [acceptedFiles[0]] : [];
-    }
-    onChange && onChange(newFiles);
-    setFiles(newFiles);
-  }, []);
+  const onDropC = useCallback(
+    (acceptedFiles: File[]) => {
+      let newFiles: File[] = [];
+      if (multiple) {
+        newFiles = [...files, ...acceptedFiles];
+      } else {
+        newFiles = acceptedFiles[0] ? [acceptedFiles[0]] : [];
+      }
+      onChange && onChange(newFiles);
+      setFiles(newFiles);
+    },
+    [files]
+  );
 
   const removeFile = (fileToRemove: File) => {
     let newFiles: File[] = files.filter((file) => file !== fileToRemove);
@@ -106,7 +110,7 @@ function DropzoneProvider({
   const categorized = useMemo(() => categorizedFiles(files), [files]);
 
   useEffect(() => {
-    if (!value) {
+    if (!value || (Array.isArray(value) && value.length === 0)) {
       setFiles([]);
     }
   }, [value]);
