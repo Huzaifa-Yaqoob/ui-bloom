@@ -231,6 +231,8 @@ function ImagesPreview() {
   );
 }
 
+// function ImagePreview({ file }: { file: File }) {}
+
 function AllImages({ images }: { images: File[] | undefined }) {
   return (
     <>
