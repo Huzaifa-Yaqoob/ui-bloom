@@ -26,7 +26,15 @@ export default function DropzoneForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      file: [],
+      file: {
+        files: [],
+        previews: [
+          "https://static1.cbrimages.com/wordpress/wp-content/uploads/2019/11/Goku-Feature-Image.jpg",
+          "http://commondatastorage.googleapis.com/codeskulptor-assets/jump.ogg",
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        ],
+      },
     },
   });
 
