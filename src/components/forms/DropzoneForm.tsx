@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
-import { FieldRenderer } from "@/registry/field-renderer/field-renderer";
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
+import { Form, FormField } from '@/components/ui/form';
+import { FieldRenderer } from '@/registry/field-renderer/field-renderer';
 import {
   DropzoneProvider,
   DropArea,
   PreviewArea,
-} from "@/registry/react-dropzone-input/react-dropzone-input";
+} from '@/registry/react-dropzone-input/react-dropzone-input';
 
 const formSchema = z.object({
   file: z.any(),
@@ -61,7 +61,7 @@ export default function DropzoneForm() {
           <Button type="submit">Submit</Button>
           <Button
             type="reset"
-            variant={"outline"}
+            variant={'outline'}
             onClick={() => {
               form.reset();
             }}
