@@ -1,32 +1,42 @@
 ---
-title: "Field Renderer"
-description: "A wrapper around the Input field that helps reduce the lines of code, so you don't have to use each component from shadcn Form like FormControl, FormDescription, FormItem, FormLabel, and FormMessage."
+title: 'Field Renderer'
+description: 'The Field Renderer component is a reusable wrapper for input fields within a form. It helps reduce repetitive code by abstracting commonly used form field structures into a separate, maintainable component. This promotes cleaner code and improves the overall organization of your form logic.'
 ---
 
-import FieldRendererForm from "@/components/forms/field-renderer-form";
-import PackageInstall from "@/components/docs/PackageInstall";
-import PreviewTabs from "@/components/docs/PreviewTabs";
-import code from "@/components/code/forms/field-renderer-form-code";
+import FieldRendererForm from '@/components/forms/field-renderer-form';
+import PackageInstall from '@/components/docs/PackageInstall';
+import PreviewTabs from '@/components/docs/PreviewTabs';
+import code from '@/components/code/forms/field-renderer-form-code';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
-import config from "config.ts";
+## How To Use
+
+Using the Field Renderer component is simple. After installation, import the component and use it within the render function of the FormField component provided by shadcn/ui,<br/>
+This helps streamline your form structure by centralizing the rendering logic of form fields into one consistent component.
 
 <Callout title="Usage Restriction">
-  This component should only be used inside a form component.
+  This component is designed to be used exclusively within a FormField
+  component. It will not function correctly outside of that context.
 </Callout>
 
-## Installation
+<Steps>
 
-{<PackageInstall name={"field-renderer"}/>}
+<Step>
+### Run this command in your terminal to add this component in your project.
 
-## Preview
-
-{<PreviewTabs component={<FieldRendererForm />} code={code} name={"field-renderer"}/>}
-
-## Usage
+<PackageInstall name={'field-renderer'} />
+</Step>
+<Step>
+### First import this component where you want to use it.
 
 ```tsx
-import { FieldRenderer } from "@/components/ui/field-renderer";
+import { FieldRenderer } from '@/components/ui/field-renderer';
 ```
+
+</Step>
+<Step>
+### And then use it in yourcomponent.
 
 ```tsx
 <FormField
@@ -40,16 +50,48 @@ import { FieldRenderer } from "@/components/ui/field-renderer";
 />
 ```
 
+</Step>
+</Steps>
+
+<Callout>
+  If your form structure and styling remain consistent throughout the project,
+  it's recommended to apply your custom styles directly within the Field
+  Renderer component itself. This approach eliminates the need to repeatedly
+  pass styling props every time you use it, making your code cleaner and more
+  maintainable.
+</Callout>
+
+### Preview
+
+<PreviewTabs
+  component={<FieldRendererForm />}
+  code={code}
+  name={'field-renderer'}
+/>
+
 ## Accepted Props
 
-| Prop          | Type              | Description                                      |
-| ------------- | ----------------- | ------------------------------------------------ |
-| `label`       | `React.ReactNode` | The label displayed above the input field.       |
-| `description` | `React.ReactNode` | Optional description text below the input field. |
-| `children`    | `React.ReactNode` | The input element or any additional children.    |
+<TypeTable
+  type={{
+    label: {
+      description: 'The label displayed above the input field.',
+      type: 'React.ReactNode',
+      default: 'custom component',
+    },
+    description: {
+      description: 'Optional description text below the input field.',
+      type: 'React.ReactNode',
+      default: 'custom component',
+    },
+    children: {
+      description: 'The input element or any additional children.',
+      type: 'React.ReactNode',
+      default: '',
+    },
+  }}
+/>
 
 ## Dependencies
 
-This component depends on the `Form` component from shadcn/ui. Ensure you have it installed and set up correctly.
-
-[View Form Component Documentation](https://ui.shadcn.com/docs/components/form)
+- **Form:** This component relies on the `Form` component from shadcn/ui for proper integration with form handling and submission.
+  [View Form Documentation](https://ui.shadcn.com/docs/components/form)
