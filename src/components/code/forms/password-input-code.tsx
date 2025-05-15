@@ -1,4 +1,4 @@
-export default `"use client";
+const passwordInputCode = `"use client";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,3 +49,5 @@ export function PasswordInputForm() {
   );
 }
 `;
+
+export default passwordInputCode;

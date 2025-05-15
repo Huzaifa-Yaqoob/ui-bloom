@@ -1,4 +1,4 @@
-export default `"use client";
+const selectCreatableCode = `"use client";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -91,3 +91,5 @@ export function CreatableForm() {
   );
 }
 `;
+
+export default selectCreatableCode;

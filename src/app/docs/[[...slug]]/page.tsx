@@ -26,7 +26,7 @@ export default async function Page(props: {
         <MDX
           components={{
             ...defaultMdxComponents,
-            img: (props) => <ImageZoom {...(props as any)} />,
+            img: (props) => <ImageZoom {...props} />,
           }}
         />
       </DocsBody>

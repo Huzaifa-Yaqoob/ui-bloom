@@ -1,4 +1,4 @@
-export default `"use client";
+const selectBasicCode = `"use client";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -87,3 +87,5 @@ export function BasicForm() {
   );
 }
 `;
+
+export default selectBasicCode;

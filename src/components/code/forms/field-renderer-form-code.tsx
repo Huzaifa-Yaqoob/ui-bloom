@@ -1,4 +1,4 @@
-export default `"use client";
+const fieldRendererCode = `"use client";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,3 +49,5 @@ export default function FieldRendererForm() {
   );
 }
 `;
+
+export default fieldRendererCode;

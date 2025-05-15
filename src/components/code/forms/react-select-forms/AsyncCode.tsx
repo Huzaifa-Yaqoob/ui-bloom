@@ -1,4 +1,4 @@
-export default `"use client";
+const selectAsyncCode = `"use client";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -115,3 +115,5 @@ export function AsyncForm() {
   );
 }
 `;
+
+export default selectAsyncCode;
