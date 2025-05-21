@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
-import { OpenInV0 } from "./OpenInV0";
-import PreviewWrapper from "../common/preview-wrapper";
+import { useState } from 'react';
+import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
+import { OpenInV0 } from './OpenInV0';
+import PreviewWrapper from '../common/preview-wrapper';
 
 export default function PreviewTabs({
   component,
@@ -25,7 +25,7 @@ export default function PreviewTabs({
               setIsUi(true);
             }}
             className={
-              "p-4 border-foreground cursor-pointer " + (isUi && "border-b")
+              'p-4 border-foreground cursor-pointer ' + (isUi && 'border-b')
             }
           >
             UI
@@ -35,7 +35,7 @@ export default function PreviewTabs({
               setIsUi(false);
             }}
             className={
-              "p-4 border-foreground cursor-pointer " + (!isUi && "border-b")
+              'p-4 border-foreground cursor-pointer ' + (!isUi && 'border-b')
             }
           >
             Code
@@ -46,7 +46,7 @@ export default function PreviewTabs({
       {isUi ? (
         <PreviewWrapper>{component}</PreviewWrapper>
       ) : (
-        <DynamicCodeBlock lang="typescript" code={code} />
+        <DynamicCodeBlock lang="tsx" code={code} />
       )}
     </div>
   );

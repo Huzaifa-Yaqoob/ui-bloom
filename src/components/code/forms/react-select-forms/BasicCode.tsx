@@ -37,7 +37,7 @@ export function BasicForm() {
     defaultValues: {
       color: convertToOption("", options),
       color2: convertToOptions(["smoothie", "juice"], groupedOptions),
-    },
+    }
   });
 
   // 2. Define a submit handler.
@@ -87,5 +87,19 @@ export function BasicForm() {
   );
 }
 `;
+
+export const convertToOptionCode = `const form = useForm<z.infer<typeof formSchema>>({
+resolver: zodResolver(formSchema),
+defaultValues: {
+color: convertToOption("", options),
+},
+});`;
+
+export const convertToOptionsCode = `const form = useForm<z.infer<typeof formSchema>>({
+resolver: zodResolver(formSchema),
+defaultValues: {
+color: convertToOptions(["smoothie", "juice"], groupedOptions),
+},
+});`;
 
 export default selectBasicCode;

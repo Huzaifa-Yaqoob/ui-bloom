@@ -1,116 +1,202 @@
 ---
-title: "React Select Input"
-description: "A customizable select component built with react-select that integrates seamlessly with shadcn/ui, supporting multi-select, form validation, and dynamic option creation."
+title: 'React Select Input'
+description: "These components are built to seamlessly integrate React Select with shadcn/ui. They provide a smooth developer experience when working with react-select in projects that use shadcn's design system. By using these components, you can easily apply shadcn-style customization and styling, along with built-in error handling when used within a form. Additionally, when used inside a Form component, these components come with helper functions that simplify validation and data handling, making form integration much easier and more consistent."
 ---
 
-import { AsyncForm } from "@/components/forms/react-select-forms/Async";
-import { BasicForm } from "@/components/forms/react-select-forms/Basic";
-import { CreatableForm } from "@/components/forms/react-select-forms/Creatable";
-import { AsyncCreatableForm } from "@/components/forms/react-select-forms/AsyncCreatable";
-import AsyncFormCode from "@/components/code/forms/react-select-forms/AsyncCode";
-import BasicFormCode from "@/components/code/forms/react-select-forms/BasicCode";
-import CreatableFormCode from "@/components/code/forms/react-select-forms/CreatableCode";
-import AsyncCreatableFormCode from "@/components/code/forms/react-select-forms/AsyncCreatableCode";
-import PackageInstall from "@/components/docs/PackageInstall";
-import PreviewTabs from "@/components/docs/PreviewTabs";
-import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
-import config from "config.ts";
+import { AsyncForm } from '@/components/forms/react-select-forms/Async';
+import { BasicForm } from '@/components/forms/react-select-forms/Basic';
+import { CreatableForm } from '@/components/forms/react-select-forms/Creatable';
+import { AsyncCreatableForm } from '@/components/forms/react-select-forms/AsyncCreatable';
+import AsyncFormCode from '@/components/code/forms/react-select-forms/AsyncCode';
+import BasicFormCode, {
+  convertToOptionCode,
+  convertToOptionsCode,
+} from '@/components/code/forms/react-select-forms/BasicCode';
+import CreatableFormCode from '@/components/code/forms/react-select-forms/CreatableCode';
+import AsyncCreatableFormCode from '@/components/code/forms/react-select-forms/AsyncCreatableCode';
+import PackageInstall from '@/components/docs/PackageInstall';
+import PreviewTabs from '@/components/docs/PreviewTabs';
+import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Callout } from 'fumadocs-ui/components/callout';
 
-## Installation
+## How To Use
 
-Add this in your global css file.
+<Steps>
+<Step>
+### Update `global.css`
 
-```css
-/* no scroll bar for react-select input field */
-.no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
+Be sure to import the following `CSS`, as it includes a utility class used to hide the `scrollbar` within the component. If you also want to hide the scrollbar in the `input` area where selected values are displayed, you can add the same `CSS` to your sglobal or main stylesheet.
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-```
-
-{<PackageInstall name={"react-select-input"}/>}
-
-## Preview
-
-#### Simple Select Component
-
-{<PreviewTabs component={<BasicForm />} code={BasicFormCode} name={"react-select-input"}/>}
-
-#### Async Select Component
-
-{<PreviewTabs component={<AsyncForm />} code={AsyncFormCode} name={"react-select-input"}/>}
-
-#### Creatable Select Component
-
-{<PreviewTabs component={<CreatableForm />} code={CreatableFormCode} name={"react-select-input"}/>}
-
-#### Async Creatable Select Component
-
-{<PreviewTabs component={<AsyncCreatableForm />} code={AsyncCreatableFormCode} name={"react-select-input"}/>}
-
-## Usage
-
-```tsx
-import { ReactSelect } from "@/components/ui/react-select-input";
-```
-
-```tsx
-// Simple without form
-<ReactSelect options={groupedOptions} {...field} />
-```
-
-```tsx
-// In form
-<FormField
-  control={form.control}
-  name="password"
-  render={({ field }) => (
-    <FieldRenderer label="Password">
-      <ReactSelect options={groupedOptions} {...field} />
-    </FieldRenderer>
-  )}
+<DynamicCodeBlock
+  lang={'css'}
+  code={`/* no scroll bar for react-select input field */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }`}
 />
-```
 
-## Helper Functions
+</Step>
+<Step>
 
-These functions help manipulate and transform options in a structured way.
+### Install
 
-### `flattenOptions`
+Run the following command in termianal to add these components in your project.
 
-Flattens a nested options structure into a single-level array.
+<PackageInstall name={'react-select-input'} />
+</Step>
+</Steps>
 
-```tsx
-import { flattenOptions } from "@/components/ui/react-select-input";
-```
+Now, let's go through each component and helper function in detail. This will help you understand their purpose, how to use them, and where they fit best within your project.
 
-### `convertToOption`
+## Simple Select Component
 
-Retrieves an option object based on a given string value and an array of options. This function is particularly useful for setting the default value or selected value in a single-select input.
+#### About
 
-```tsx
-import { convertToOption } from "@/components/ui/react-select-input";
-```
+This is a **simple select component**. You just need to provide the `options` prop, and the component will render the selection list based on those options.
 
-### `convertToOptions`
+#### Import
 
-Get an array of string and array of options and return the array of option object to use in default value or value use if select accepts multiple value.
+First, import this component in the file where you want to use it.
 
-```tsx
-import { convertToOptions } from "@/components/ui/react-select-input";
-```
+<DynamicCodeBlock
+  lang={'tsx'}
+  code={`import {
+  ReactSelect,
+  convertToOptions,
+  convertToOption,
+} from "@/registry/react-select-input/react-select-input";`}
+/>
 
-### `getFields`
+#### Preview
 
-Extracts a specific field from an array of selected option objects. This function is useful when only a particular property of the selected options is required.
+You can now easily use it within your code as needed.
 
-```tsx
-import { getFields } from "@/components/ui/react-select-input";
-```
+<PreviewTabs
+  component={<BasicForm />}
+  code={BasicFormCode}
+  name={'react-select-input'}
+/>
+
+#### Accepted Props
+
+This component accepts all the props supported by the default `react-select` base component.
+
+[View all available props in the official React Select documentation](https://react-select.com/props#select-props)
+
+## Async Select Component
+
+#### About
+
+This is an **async select component**. You need to provide a `loadOptions` prop, which should be an asynchronous function that returns a promise. This allows you to fetch options dynamically from a backend or external API.
+
+#### Import
+
+First, import this component in the file where you want to use it.
+
+<DynamicCodeBlock
+  lang={'tsx'}
+  code={`import {
+  ReactAsyncSelect,
+  convertToOptions,
+  MyOption,
+  flattenOptions,
+  convertToOption,
+} from "@/registry/react-select-input/react-select-input";`}
+/>
+
+#### Preview
+
+You can now easily use it within your code as needed.
+
+<PreviewTabs
+  component={<AsyncForm />}
+  code={AsyncFormCode}
+  name={'react-select-input'}
+/>
+
+#### Accepted Props
+
+This component accepts all the props supported by the default `react-select` async component.
+
+[View all available props in the official React Select documentation](https://react-select.com/props#async-props)
+
+## Creatable Select Component
+
+#### About
+
+This is a **creatable select component**. It works with the `options` prop, just like a standard select. Additionally, it allows users to create and select new options that are not already in the list. This is useful when the available choices are dynamic or user-defined.
+
+#### Import
+
+First, import this component in the file where you want to use it.
+
+<DynamicCodeBlock
+  lang={'tsx'}
+  code={`import {
+  ReactCreatableSelect,
+  convertToOptions,
+  convertToOption,
+} from "@/registry/react-select-input/react-select-input";`}
+/>
+
+#### Preview
+
+You can now easily use it within your code as needed.
+
+<PreviewTabs
+  component={<CreatableForm />}
+  code={CreatableFormCode}
+  name={'react-select-input'}
+/>
+
+#### Accepted Props
+
+This component accepts all the props supported by the default `react-select` creatable component.
+
+[View all available props in the official React Select documentation](https://react-select.com/props#creatable-props)
+
+## Async Creatable Select Component
+
+#### About
+
+This is an **async creatable select component**. It requires a `loadOptions` prop, which should be an asynchronous function—typically used to fetch options from an API. In addition to loading options dynamically, it also allows users to create new options if the desired one doesn't already exist.
+
+#### Import
+
+First, import this component in the file where you want to use it.
+
+<DynamicCodeBlock
+  lang={'tsx'}
+  code={`import {
+  ReactAsyncCreatableSelect,
+  convertToOptions,
+  MyOption,
+  flattenOptions,
+  convertToOption,
+} from "@/registry/react-select-input/react-select-input";`}
+/>
+
+#### Preview
+
+You can now easily use it within your code as needed.
+
+<PreviewTabs
+  component={<AsyncCreatableForm />}
+  code={AsyncCreatableFormCode}
+  name={'react-select-input'}
+/>
+
+#### Accepted Props
+
+This component accepts all the props supported by the default `react-select` async component.
+
+[View all available props in the official React Select documentation](https://react-select.com/props)
 
 <Callout title="Usage Restriction">
   The default value in select component for single select must be an object
@@ -118,6 +204,151 @@ import { getFields } from "@/components/ui/react-select-input";
   `form.reset` function will work properly and for multi select default value
   must be an empty array.
 </Callout>
+
+## Helper Functions
+
+These functions help manipulate and transform options in a structured way.
+
+### `flattenOptions`
+
+#### About
+
+This utility function is used to convert grouped options into a flat array. It removes any nested structure and returns a single-level array of options, making it easier to work with components that expect flat data.
+
+#### Import
+
+You can import it like this and use it to convert group options to single level
+
+<DynamicCodeBlock
+  lang={'tsx'}
+  code={`import { flattenOptions } from '@/components/ui/react-select-input';`}
+/>
+
+#### Accepted Parameters
+
+<TypeTable
+  type={{
+    options: {
+      description: 'The nested or flat options of react-select type.',
+      type: `OptionsOrGroups\<MyOption, GroupBase\<MyOption\>\>`,
+      default: '',
+    },
+  }}
+/>
+
+### `convertToOption`
+
+#### About
+
+Retrieves an option object based on a given string value and an array of options. This function is particularly useful for setting the default value or selected value in a single-select input.
+
+#### Import
+
+<DynamicCodeBlock
+  lang={'tsx'}
+  code={"import { convertToOption } from '@/components/ui/react-select-input';"}
+/>
+
+#### Use
+
+<DynamicCodeBlock lang="tsx" code={convertToOptionCode} />
+
+#### Accepted Parameters
+
+<TypeTable
+  type={{
+    value: {
+      description:
+        'A string values. The function uses this string to find and return the matching option objects whose value fields are included in this list.',
+      type: 'string',
+      default: '',
+    },
+    options: {
+      description:
+        'The options object from which we will get the data of options',
+      type: 'OptionsOrGroups\<MyOption, GroupBase\<MyOption\>\>',
+      default: '',
+    },
+    valueField: {
+      description: `Specifies the key in each option object to compare against the values in the string[] array. This allows you to match based on a specific field (e.g., 'value', 'id', etc.).`,
+      type: 'string',
+      default: 'value',
+    },
+  }}
+/>
+
+### `convertToOptions`
+
+Get an array of string and array of options and return the array of option object to use in default value or value use if select accepts multiple value.
+
+#### Import
+
+<DynamicCodeBlock
+  lang={'tsx'}
+  code={
+    "import { convertToOptions } from '@/components/ui/react-select-input';"
+  }
+/>
+
+#### Use
+
+<DynamicCodeBlock lang="tsx" code={convertToOptionsCode} />
+
+#### Accepted Parameters
+
+<TypeTable
+  type={{
+    value: {
+      description:
+        'An array of string values. The function uses this array to find and return the matching option objects whose value fields are included in this list.',
+      type: 'string[]',
+      default: '[]',
+    },
+    options: {
+      description:
+        'The options object from which we will get the data of options',
+      type: 'OptionsOrGroups\<MyOption, GroupBase\<MyOption\>\>',
+      default: '',
+    },
+    valueField: {
+      description: `Specifies the key in each option object to compare against the values in the string[] array. This allows you to match based on a specific field (e.g., 'value', 'id', etc.).`,
+      type: 'string',
+      default: 'value',
+    },
+  }}
+/>
+
+### `getFields`
+
+This function extracts a specific field from an array of selected option objects. It is especially useful in form submit handlers when you need to retrieve only a particular property (e.g., id, value, or label) from the selected options.
+
+For example, if you have selected options with multiple fields but only need the value field for submission, this function helps simplify that extraction.
+
+#### Import
+
+<DynamicCodeBlock
+  lang={'tsx'}
+  code={"import { getFields } from '@/components/ui/react-select-input';"}
+/>
+
+#### Accepted Parameters
+
+<TypeTable
+  type={{
+    field: {
+      description:
+        'A string value a field of option object that you want to get',
+      type: 'string[]',
+      default: '[]',
+    },
+    options: {
+      description:
+        'The options object from which we will get the data of options',
+      type: 'MyOption[]',
+      default: '',
+    },
+  }}
+/>
 
 ## Dependencies
 
