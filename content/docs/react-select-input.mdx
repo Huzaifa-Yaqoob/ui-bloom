@@ -232,6 +232,7 @@ You can import it like this and use it to convert group options to single level
       description: 'The nested or flat options of react-select type.',
       type: `OptionsOrGroups\<MyOption, GroupBase\<MyOption\>\>`,
       default: '',
+      required: true,
     },
   }}
 />
@@ -262,12 +263,14 @@ Retrieves an option object based on a given string value and an array of options
         'A string values. The function uses this string to find and return the matching option objects whose value fields are included in this list.',
       type: 'string',
       default: '',
+      required: true,
     },
     options: {
       description:
         'The options object from which we will get the data of options',
       type: 'OptionsOrGroups\<MyOption, GroupBase\<MyOption\>\>',
       default: '',
+      required: true,
     },
     valueField: {
       description: `Specifies the key in each option object to compare against the values in the string[] array. This allows you to match based on a specific field (e.g., 'value', 'id', etc.).`,
@@ -309,6 +312,7 @@ Get an array of string and array of options and return the array of option objec
         'The options object from which we will get the data of options',
       type: 'OptionsOrGroups\<MyOption, GroupBase\<MyOption\>\>',
       default: '',
+      required: true,
     },
     valueField: {
       description: `Specifies the key in each option object to compare against the values in the string[] array. This allows you to match based on a specific field (e.g., 'value', 'id', etc.).`,
@@ -346,6 +350,7 @@ For example, if you have selected options with multiple fields but only need the
         'The options object from which we will get the data of options',
       type: 'MyOption[]',
       default: '',
+      required: true,
     },
   }}
 />
