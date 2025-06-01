@@ -1,9 +1,10 @@
 'use client';
 
-import { useMemo, ComponentProps } from 'react';
+import { useMemo, ComponentProps, FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { Ellipsis, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useWindowWidth, BreakPoints } from '../hooks/useWindowWidth';
+import { cn } from '@/lib/utils';
 
 interface LogicalPaginationProps {
   size?: {
@@ -18,6 +19,12 @@ interface LogicalPaginationProps {
   isPrev?: boolean;
   isNext?: boolean;
   onPageChange: (page: number) => void;
+  className?: string;
+
+  PreviousComponent?: FC<ComponentProps<'button'>>;
+  NextComponent?: FC<ComponentProps<'button'>>;
+  GapPlaceholderComponent?: FC;
+  PageNumberComponent?: FC<PageNumberProps>;
 }
 
 interface PageNumberProps extends ComponentProps<'button'> {
@@ -34,7 +41,19 @@ const logicalPaginationDefaultProps = {
 };
 
 function LogicalPagination(props: LogicalPaginationProps) {
-  const { size, totalPages, currentPage, isPrev, isNext, onPageChange } = {
+  const {
+    size,
+    totalPages,
+    currentPage,
+    isPrev,
+    isNext,
+    onPageChange,
+    className,
+    PreviousComponent = DefaultPrevious,
+    NextComponent = DefaultNext,
+    GapPlaceholderComponent = DefaultGapPlaceholder,
+    PageNumberComponent = DefaultPageNumber,
+  } = {
     ...logicalPaginationDefaultProps,
     ...props,
   };
@@ -55,7 +74,9 @@ function LogicalPagination(props: LogicalPaginationProps) {
     if (width < BreakPoints.md) return getClosestSize('sm');
     if (width < BreakPoints.lg) return getClosestSize('md', 'sm');
     if (width < BreakPoints.xl) return getClosestSize('lg', 'md', 'sm');
-    return getClosestSize('xl', 'lg', 'md', 'sm');
+    if (width < BreakPoints['2xl'])
+      return getClosestSize('xl', 'lg', 'md', 'sm');
+    return getClosestSize('2xl', 'xl', 'lg', 'md', 'sm');
   }, [width, size]);
 
   const pageNumbers = useMemo(() => {
@@ -85,7 +106,6 @@ function LogicalPagination(props: LogicalPaginationProps) {
     let startPage = Math.max(2, currentPage - pageNeighbors);
     let endPage = Math.min(totalPages - 1, currentPage + pageNeighbors);
 
-    // adjust for boundaries
     if (currentPage - pageNeighbors < 2) {
       endPage = Math.min(
         totalPages - 1,
@@ -113,15 +133,17 @@ function LogicalPagination(props: LogicalPaginationProps) {
   }, [currentPage, totalPages, visiblePages]);
 
   return (
-    <div className="flex items-center gap-2 flex-wrap">
+    <div className={cn('flex items-center gap-2 flex-wrap', className)}>
       {isPrev && (
-        <Previous onClick={() => onPageChange(Math.max(1, currentPage - 1))} />
+        <PreviousComponent
+          onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+        />
       )}
       {pageNumbers.map((num, idx) =>
         num === -1 ? (
-          <GapPlaceholder key={`gap-${idx}`} />
+          <GapPlaceholderComponent key={`gap-${idx}`} />
         ) : (
-          <PageNumber
+          <PageNumberComponent
             key={num}
             num={num}
             isActive={num === currentPage}
@@ -130,7 +152,7 @@ function LogicalPagination(props: LogicalPaginationProps) {
         )
       )}
       {isNext && (
-        <Next
+        <NextComponent
           onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         />
       )}
@@ -138,36 +160,34 @@ function LogicalPagination(props: LogicalPaginationProps) {
   );
 }
 
-function PageNumber({ num, isActive, ...props }: PageNumberProps) {
-  return (
-    <Button variant={isActive ? 'default' : 'outline'} size="sm" {...props}>
-      {num}
-    </Button>
-  );
-}
+// --- Default Components ---
 
-function GapPlaceholder() {
-  return (
-    <Button variant="ghost" size="sm" disabled>
-      <Ellipsis />
-    </Button>
-  );
-}
+const DefaultPageNumber: FC<PageNumberProps> = ({
+  num,
+  isActive,
+  ...props
+}) => (
+  <Button variant={isActive ? 'default' : 'outline'} size="sm" {...props}>
+    {num}
+  </Button>
+);
 
-function Previous(props: ComponentProps<'button'>) {
-  return (
-    <Button variant="outline" size="sm" {...props}>
-      <ChevronLeft />
-    </Button>
-  );
-}
+const DefaultGapPlaceholder: FC = () => (
+  <Button variant="ghost" size="sm" disabled>
+    <Ellipsis />
+  </Button>
+);
 
-function Next(props: ComponentProps<'button'>) {
-  return (
-    <Button variant="outline" size="sm" {...props}>
-      <ChevronRight />
-    </Button>
-  );
-}
+const DefaultPrevious: FC<ComponentProps<'button'>> = (props) => (
+  <Button variant="outline" size="sm" {...props}>
+    <ChevronLeft />
+  </Button>
+);
 
-export { LogicalPagination };
+const DefaultNext: FC<ComponentProps<'button'>> = (props) => (
+  <Button variant="outline" size="sm" {...props}>
+    <ChevronRight />
+  </Button>
+);
+
+export { LogicalPagination, type PageNumberProps };
