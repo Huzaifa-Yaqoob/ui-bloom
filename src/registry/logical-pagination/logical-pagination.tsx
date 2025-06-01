@@ -61,6 +61,21 @@ function LogicalPagination(props: LogicalPaginationProps) {
   const pageNumbers = useMemo(() => {
     const pages: number[] = [];
 
+    if (visiblePages <= 1) {
+      pages.push(currentPage);
+      return pages;
+    }
+
+    if (visiblePages === 2) {
+      if (currentPage === totalPages) {
+        if (currentPage - 1 >= 1) pages.push(currentPage - 1);
+        pages.push(currentPage);
+      } else {
+        pages.push(currentPage, currentPage + 1);
+      }
+      return pages;
+    }
+
     if (totalPages <= visiblePages) {
       for (let i = 1; i <= totalPages; i++) pages.push(i);
       return pages;

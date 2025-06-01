@@ -2,7 +2,7 @@ import PaginationView from '@/components/sections/PaginationView';
 
 export default function Page() {
   return (
-    <div className="w-[500px]">
+    <div className="px-4">
       <PaginationView />
     </div>
   );

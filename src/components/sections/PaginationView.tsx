@@ -11,6 +11,7 @@ export default function PaginationView() {
       <LogicalPagination
         totalPages={25}
         currentPage={currentPage}
+        size={{ sm: 0, lg: 7, '2xl': 10 }}
         onPageChange={(page) => setCurrentPage(page)}
       />
     </section>
