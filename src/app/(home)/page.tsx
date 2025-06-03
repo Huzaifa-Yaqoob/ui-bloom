@@ -24,7 +24,7 @@ export default function HomePage() {
       </div>
       <div className="mx-4 md:mx-8 lg:mx-16 flex items-center gap-4 mb-4">
         <a
-          href="www.linkedin.com/in/huzaifa-yaqoob"
+          href="http://www.linkedin.com/in/huzaifa-yaqoob"
           className="flex items-center gap-2 justify-center"
         >
           <Linkedin className="bg-muted h-8 w-8 p-1 rounded" />{' '}
