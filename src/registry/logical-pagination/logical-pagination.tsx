@@ -7,13 +7,7 @@ import { useWindowWidth, BreakPoints } from '../hooks/useWindowWidth';
 import { cn } from '@/lib/utils';
 
 interface LogicalPaginationProps {
-  size?: {
-    sm?: number;
-    md?: number;
-    lg?: number;
-    xl?: number;
-    '2xl'?: number;
-  };
+  size?: Partial<typeof BreakPoints>;
   totalPages: number;
   currentPage: number;
   isPrev?: boolean;
