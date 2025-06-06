@@ -1,5 +1,5 @@
 {
   "title": "docs",
   "root": true,
-  "pages": ["index", "---Components---", "..."]
+  "pages": ["index", "---Hooks---", "./use-screen-width", "---Components---", "..."]
 }

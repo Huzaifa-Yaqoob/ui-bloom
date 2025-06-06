@@ -1,6 +1,6 @@
 ---
 title: 'React Select Input'
-description: "These components are built to seamlessly integrate React Select with shadcn/ui. They provide a smooth developer experience when working with react-select in projects that use shadcn's design system. By using these components, you can easily apply shadcn-style customization and styling, along with built-in error handling when used within a form. Additionally, when used inside a Form component, these components come with helper functions that simplify validation and data handling, making form integration much easier and more consistent."
+description: "These components are built to seamlessly integrate React Select with shadcn/ui. They provide a smooth developer experience when working with react-select in projects that use shadcn's design system. By using these components, you can apply shadcn-style customization and styling, along with built-in error handling when used within a form. Additionally, when used inside a Form component, these components come with helper functions that simplify validation and data handling, making form integration much easier and more consistent."
 ---
 
 import { AsyncForm } from '@/components/forms/react-select-forms/Async';
@@ -27,7 +27,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 <Step>
 ### Update `global.css`
 
-Be sure to import the following `CSS`, as it includes a utility class used to hide the `scrollbar` within the component. If you also want to hide the scrollbar in the `input` area where selected values are displayed, you can add the same `CSS` to your sglobal or main stylesheet.
+Be sure to import the following `CSS`, as it includes a utility class used to hide the `scrollbar` within the component. If you also want to hide the scrollbar in the `input` area where selected values are displayed, you can add the same `CSS` to your global or main stylesheet.
 
 <DynamicCodeBlock
   lang={'css'}
@@ -46,7 +46,7 @@ Be sure to import the following `CSS`, as it includes a utility class used to hi
 
 ### Install
 
-Run the following command in termianal to add these components in your project.
+Run the following command in terminal to add these components in your project.
 
 <PackageInstall name={'react-select-input'} />
 </Step>
@@ -58,7 +58,7 @@ Now, let's go through each component and helper function in detail. This will he
 
 #### About
 
-This is a **simple select component**. You just need to provide the `options` prop, and the component will render the selection list based on those options.
+This is a **simple select component**. You need to provide the `options` prop, and the component will render the selection list based on those options.
 
 #### Import
 
@@ -75,7 +75,7 @@ First, import this component in the file where you want to use it.
 
 #### Preview
 
-You can now easily use it within your code as needed.
+You can now use it within your code as needed.
 
 <PreviewTabs
   component={<BasicForm />}
@@ -112,7 +112,7 @@ First, import this component in the file where you want to use it.
 
 #### Preview
 
-You can now easily use it within your code as needed.
+You can now use it within your code as needed.
 
 <PreviewTabs
   component={<AsyncForm />}
@@ -147,7 +147,7 @@ First, import this component in the file where you want to use it.
 
 #### Preview
 
-You can now easily use it within your code as needed.
+You can now use it within your code as needed.
 
 <PreviewTabs
   component={<CreatableForm />}
@@ -184,7 +184,7 @@ First, import this component in the file where you want to use it.
 
 #### Preview
 
-You can now easily use it within your code as needed.
+You can now use it within your code as needed.
 
 <PreviewTabs
   component={<AsyncCreatableForm />}
@@ -217,7 +217,7 @@ This utility function is used to convert grouped options into a flat array. It r
 
 #### Import
 
-You can import it like this and use it to convert group options to single level
+You can import it like this and use it to convert group options to a single level
 
 <DynamicCodeBlock
   lang={'tsx'}
@@ -279,7 +279,7 @@ Retrieves an option object based on a given string value and an array of options
 
 ### `convertToOptions`
 
-Get an array of string and array of options and return the array of option object to use in default value or value use if select accepts multiple value.
+Get an array of string and array of options and return the array of an option object to use in default value or value use if select accepts multiple values.
 
 #### Import
 

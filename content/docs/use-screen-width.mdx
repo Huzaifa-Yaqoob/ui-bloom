@@ -1,0 +1,41 @@
+---
+title: 'useWidthScreen'
+description: 'A custom React hook that returns the current window width in pixels. It listens for resize events and updates the value in real-time, enabling responsive behavior in components. This hook is commonly used alongside custom breakpoints to adapt layouts based on screen size.'
+---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
+import PackageInstall from '@/components/docs/PackageInstall';
+
+## How To Use
+
+<Steps>
+    <Step>
+    ### Install
+
+    Run the following command in terminal to add these components in your project.
+
+    <PackageInstall name={'useWindowWidth'} />
+
+  </Step>
+  <Step>
+    #### Import
+
+    First, import this component in the file where you want to use it.
+
+    <DynamicCodeBlock
+      lang={'tsx'}
+      code={`import { useWindowWidth, BreakPoints } from '@/hooks/useWindowWidth';`} />
+
+  </Step>
+</Steps>
+
+## Features
+
+  - Real-time window width tracking
+  - Server-Side Rendering (SSR) compatible
+  - TypeScript support
+  - Automatic cleanup of event listeners
+  - Built-in standard breakpoints
