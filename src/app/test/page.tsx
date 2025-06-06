@@ -1,4 +1,4 @@
-import PaginationView from '@/components/sections/PaginationView';
+import { PaginationView } from '@/components/sections/PaginationView';
 
 export default function Page() {
   return (

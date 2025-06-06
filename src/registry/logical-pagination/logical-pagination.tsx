@@ -96,31 +96,35 @@ function LogicalPagination(props: LogicalPaginationProps) {
       return pages;
     }
 
-    const pageNeighbors = Math.floor((visiblePages - 2) / 2);
-    let startPage = Math.max(2, currentPage - pageNeighbors);
-    let endPage = Math.min(totalPages - 1, currentPage + pageNeighbors);
+    const numbersToShow = visiblePages - 2;
+    const halfVisible = Math.floor(numbersToShow / 2);
 
-    if (currentPage - pageNeighbors < 2) {
-      endPage = Math.min(
-        totalPages - 1,
-        endPage + (2 - (currentPage - pageNeighbors))
-      );
+    let startPage = Math.max(2, currentPage - halfVisible);
+    let endPage = Math.min(totalPages - 1, startPage + numbersToShow - 1);
+
+    if (endPage === totalPages - 1) {
+      startPage = Math.max(2, endPage - numbersToShow + 1);
     }
 
-    if (currentPage + pageNeighbors > totalPages - 1) {
-      startPage = Math.max(
-        2,
-        startPage - (currentPage + pageNeighbors - (totalPages - 1))
-      );
+    if (startPage === 2) {
+      endPage = Math.min(totalPages - 1, startPage + numbersToShow - 1);
     }
-
-    const hasStartEllipsis = startPage > 2;
-    const hasEndEllipsis = endPage < totalPages - 1;
 
     pages.push(1);
-    if (hasStartEllipsis) pages.push(-1);
-    for (let i = startPage; i <= endPage; i++) pages.push(i);
-    if (hasEndEllipsis) pages.push(-1);
+
+    if (startPage > 2) {
+      pages.push(-1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    // Add end ellipsis if needed
+    if (endPage < totalPages - 1) {
+      pages.push(-1);
+    }
+
     pages.push(totalPages);
 
     return pages;

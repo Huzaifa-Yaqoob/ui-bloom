@@ -1,9 +1,9 @@
-'use client';
+const PaginationViewCode = `'use client';
 
 import { useState } from 'react';
 import { LogicalPagination } from '@/registry/logical-pagination/logical-pagination';
 
-export function PaginationView() {
+export default function PaginationView() {
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
@@ -17,3 +17,6 @@ export function PaginationView() {
     </section>
   );
 }
+`;
+
+export { PaginationViewCode };

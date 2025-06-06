@@ -3,3 +3,42 @@ title: 'Logical Pagination'
 description: 'A smart pagination component that dynamically displays page numbers based on the current page, total pages, and screen size. It adapts to different viewports using breakpoints and optionally shows previous/next controls for better navigation.
 '
 ---
+
+import { PaginationView } from '@/components/sections/PaginationView';
+import { PaginationViewCode } from '@/components/code/sections/PaginationViewCode';
+import PackageInstall from '@/components/docs/PackageInstall';
+import PreviewTabs from '@/components/docs/PreviewTabs';
+import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## How To Use
+
+<Steps>
+  <Step>
+
+    ### Install
+
+    Run the following command in terminal to add these components in your project.
+
+    <PackageInstall name={'logical-pagination'} />
+
+  </Step>
+  <Step>
+    ### Import
+
+    You can now import this component anywhere you need to use it.
+
+    <DynamicCodeBlock lang={'tsx'} code={`import { LogicalPagination } from @/components/ui/logical-pagination';`}/>
+
+  </Step>
+</Steps>
+
+## Preview
+
+<PreviewTabs
+  component={<PaginationView />}
+  code={PaginationViewCode}
+  name={'logical-pagination'}
+/>
