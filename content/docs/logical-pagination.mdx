@@ -42,3 +42,67 @@ import { Callout } from 'fumadocs-ui/components/callout';
   code={PaginationViewCode}
   name={'logical-pagination'}
 />
+
+## Accepted Props
+
+## Props
+
+<TypeTable
+  type={{
+    size: {
+      description:
+        'Object containing the number of visible page numbers for different breakpoints (sm, md, lg, xl, 2xl)',
+      type: 'Partial<typeof BreakPoints>',
+      default: '{ sm: 5 }',
+    },
+    totalPages: {
+      description: 'Total number of pages',
+      type: 'number',
+      required: true,
+    },
+    currentPage: {
+      description: 'Current active page number',
+      type: 'number',
+      required: true,
+    },
+    isPrev: {
+      description: 'Whether to show the previous page button',
+      type: 'boolean',
+      default: 'true',
+    },
+    isNext: {
+      description: 'Whether to show the next page button',
+      type: 'boolean',
+      default: 'true',
+    },
+    onPageChange: {
+      description: 'Callback function called when page is changed',
+      type: '(page: number) => void',
+      required: true,
+    },
+    className: {
+      description: 'Additional CSS classes to apply to the container',
+      type: 'string',
+    },
+    PreviousComponent: {
+      description: 'Custom component for the previous button',
+      type: 'FC<ComponentProps<"button">>',
+      default: 'DefaultPrevious',
+    },
+    NextComponent: {
+      description: 'Custom component for the next button',
+      type: 'FC<ComponentProps<"button">>',
+      default: 'DefaultNext',
+    },
+    GapPlaceholderComponent: {
+      description: 'Custom component for the ellipsis/gap',
+      type: 'FC',
+      default: 'DefaultGapPlaceholder',
+    },
+    PageNumberComponent: {
+      description: 'Custom component for the page numbers',
+      type: 'FC<PageNumberProps>',
+      default: 'DefaultPageNumber',
+    },
+  }}
+/>
