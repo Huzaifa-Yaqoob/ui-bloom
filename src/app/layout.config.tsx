@@ -1,5 +1,5 @@
-import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import Logo from "@/components/icons/Logo";
+import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import Logo from '@/components/icons/Logo';
 
 /**
  * Shared layout configurations
@@ -18,14 +18,19 @@ export const baseOptions: BaseLayoutProps = {
   },
   links: [
     {
-      text: "How To use",
-      url: "/docs",
-      active: "nested-url",
+      text: 'How To use',
+      url: '/docs',
+      active: 'nested-url',
     },
     {
-      text: "Components",
-      url: "/docs/field-renderer",
-      active: "nested-url",
+      text: 'Components',
+      url: '/docs/field-renderer',
+      active: 'nested-url',
+    },
+    {
+      text: 'Hooks',
+      url: '/docs/use-screen-width',
+      active: 'nested-url',
     },
   ],
 };
