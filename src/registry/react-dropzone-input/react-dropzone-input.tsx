@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext } from "react";
-import { ControllerRenderProps, FieldPath, FieldValues } from "react-hook-form";
+import React, { createContext, useContext } from 'react';
+import { ControllerRenderProps, FieldPath, FieldValues } from 'react-hook-form';
 // import { FileText, FileMusic } from "lucide-react";
-import { useDropzone, DropzoneState, DropzoneOptions } from "react-dropzone";
+import { useDropzone, DropzoneState, DropzoneOptions } from 'react-dropzone';
 // import { cn } from "@/lib/utils";
 
 export const DropzoneContext = createContext<{
@@ -13,7 +13,7 @@ export const DropzoneContext = createContext<{
 function useDropzoneContext() {
   const context = useContext(DropzoneContext);
   if (!context) {
-    throw new Error("DropArea must be used within DropzoneWrapper.");
+    throw new Error('DropArea must be used within DropzoneWrapper.');
   }
   return context;
 }
@@ -39,7 +39,7 @@ interface DropAreaProps<T extends FieldValues, K extends FieldPath<T>> {
   field: ControllerRenderProps<T, K>;
   name: K;
   renderer: (
-    props: Omit<DropzoneState, "getRootProps" | "getInputProps">
+    props: Omit<DropzoneState, 'getRootProps' | 'getInputProps'>
   ) => React.ReactNode;
 }
 
@@ -51,10 +51,8 @@ function DropArea<T extends FieldValues, K extends FieldPath<T>>({
   const { getRootProps, getInputProps, ...props } =
     useDropzoneContext().dropzoneProps;
 
-  // React.useEffect(() => {}, []);
-
   return (
-    <div {...getRootProps()} className={unstyled ? "" : "bg-muted p-2"}>
+    <div {...getRootProps()} className={unstyled ? '' : 'bg-muted p-2'}>
       <input
         {...getInputProps({
           onChange: (event) => {

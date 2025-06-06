@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "useWindowWidth",
+  "type": "registry:hook",
+  "title": "useWindowWidth Hook",
+  "description": "This is a custom React hook implementation that provides real-time window width tracking functionality.",
+  "files": [
+    {
+      "path": "src/registry/hooks/useWindowWidth.ts",
+      "content": "'use client';\n\nimport { useState, useEffect } from 'react';\n\nconst useWindowWidth = (): number | undefined => {\n  const [width, setWidth] = useState<number | undefined>(undefined);\n\n  useEffect(() => {\n    if (typeof window === 'undefined') return;\n\n    const handleResize = () => {\n      setWidth(window.innerWidth);\n    };\n\n    handleResize();\n\n    window.addEventListener('resize', handleResize);\n\n    return () => window.removeEventListener('resize', handleResize);\n  }, []);\n\n  return width;\n};\n\n// custom breakpoints for screen to make component responsive\nconst BreakPoints = {\n  sm: 640,\n  md: 768,\n  lg: 1024,\n  xl: 1280,\n  '2xl': 1536,\n};\n\nexport { useWindowWidth, BreakPoints };\n",
+      "type": "registry:hook"
+    }
+  ]
+}

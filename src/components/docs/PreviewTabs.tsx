@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 import { OpenInV0 } from './OpenInV0';
 import PreviewWrapper from '../common/preview-wrapper';
@@ -10,7 +10,7 @@ export default function PreviewTabs({
   code,
   name,
 }: {
-  component: React.ReactNode;
+  component: ReactNode;
   code: string;
   name: string;
 }) {
