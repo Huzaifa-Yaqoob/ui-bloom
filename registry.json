@@ -70,6 +70,18 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "typography",
+      "type": "registry:ui",
+      "title": "Typography",
+      "description": "A password input field with a toggle option to show or hide the password.",
+      "files": [
+        {
+          "path": "src/registry/typography/typography.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
