@@ -61,5 +61,4 @@ const useCode = `<FormField
 />`;
 
 export { useCode };
-
 export default passwordInputCode;
