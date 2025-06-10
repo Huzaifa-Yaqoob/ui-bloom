@@ -50,7 +50,7 @@ export function PasswordInputForm() {
 }
 `;
 
-export const useCode = `<FormField
+const useCode = `<FormField
   control={form.control}
   name="password"
   render={({ field }) => (
@@ -59,5 +59,7 @@ export const useCode = `<FormField
     </FieldRenderer>
   )}
 />`;
+
+export { useCode };
 
 export default passwordInputCode;

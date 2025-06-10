@@ -50,7 +50,7 @@ export default function FieldRendererForm() {
 }
 `;
 
-export const useode = `<FormField
+const useode = `<FormField
   control={form.control}
   name="username"
   render={({ field }) => (
@@ -59,5 +59,7 @@ export const useode = `<FormField
     </FieldRenderer>
   )}
 />`;
+
+export { useode };
 
 export default fieldRendererCode;
