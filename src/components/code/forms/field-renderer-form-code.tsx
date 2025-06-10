@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import { FieldRenderer } from "@/components/ui/field-renderer";
+import { FieldRenderer } from "@/components/ui/bloom/field-renderer";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
@@ -49,5 +49,15 @@ export default function FieldRendererForm() {
   );
 }
 `;
+
+export const useode = `<FormField
+  control={form.control}
+  name="username"
+  render={({ field }) => (
+    <FieldRenderer label="Username">
+      <Input placeholder="username" {...field} />
+    </FieldRenderer>
+  )}
+/>`;
 
 export default fieldRendererCode;

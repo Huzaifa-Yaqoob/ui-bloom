@@ -5,14 +5,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import { FieldRenderer } from "@/registry/field-renderer/field-renderer";
+import { FieldRenderer } from "@/components/ui/bloom/field-renderer";
 import {
   ReactAsyncCreatableSelect,
   convertToOptions,
   MyOption,
   flattenOptions,
   convertToOption,
-} from "@/registry/react-select-input/react-select-input";
+} from "@/components/ui/bloom/react-select-input";
 import { options, groupedOptions } from "@/data/options";
 
 const formSchema = z.object({

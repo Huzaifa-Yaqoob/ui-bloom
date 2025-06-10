@@ -70,7 +70,7 @@ First, import this component in the file where you want to use it.
   ReactSelect,
   convertToOptions,
   convertToOption,
-} from "@/registry/react-select-input/react-select-input";`}
+} from "@/components/bloom/react-select-input";`}
 />
 
 #### Preview
@@ -107,7 +107,7 @@ First, import this component in the file where you want to use it.
   MyOption,
   flattenOptions,
   convertToOption,
-} from "@/registry/react-select-input/react-select-input";`}
+} from "@/components/bloom/react-select-input";`}
 />
 
 #### Preview
@@ -142,7 +142,7 @@ First, import this component in the file where you want to use it.
   ReactCreatableSelect,
   convertToOptions,
   convertToOption,
-} from "@/registry/react-select-input/react-select-input";`}
+} from "@/components/bloom/react-select-input";`}
 />
 
 #### Preview
@@ -179,7 +179,7 @@ First, import this component in the file where you want to use it.
   MyOption,
   flattenOptions,
   convertToOption,
-} from "@/registry/react-select-input/react-select-input";`}
+} from "@/components/bloom/react-select-input";`}
 />
 
 #### Preview
@@ -221,7 +221,7 @@ You can import it like this and use it to convert group options to a single leve
 
 <DynamicCodeBlock
   lang={'tsx'}
-  code={`import { flattenOptions } from '@/components/ui/react-select-input';`}
+  code={`import { flattenOptions } from '@/components/bloom/react-select-input';`}
 />
 
 #### Accepted Parameters
@@ -247,7 +247,9 @@ Retrieves an option object based on a given string value and an array of options
 
 <DynamicCodeBlock
   lang={'tsx'}
-  code={"import { convertToOption } from '@/components/ui/react-select-input';"}
+  code={
+    "import { convertToOption } from '@/components/bloom/react-select-input';"
+  }
 />
 
 #### Use
@@ -289,7 +291,7 @@ Get an array of string and array of options and return the array of an option ob
 <DynamicCodeBlock
   lang={'tsx'}
   code={
-    "import { convertToOptions } from '@/components/ui/react-select-input';"
+    "import { convertToOptions } from '@/components/bloom/react-select-input';"
   }
 />
 
@@ -332,7 +334,7 @@ For example, if you have selected options with multiple fields but only need the
 
 <DynamicCodeBlock
   lang={'tsx'}
-  code={"import { getFields } from '@/components/ui/react-select-input';"}
+  code={"import { getFields } from '@/components/bloom/react-select-input';"}
 />
 
 #### Accepted Parameters

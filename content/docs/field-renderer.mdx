@@ -6,7 +6,9 @@ description: 'The Field Renderer component is a reusable wrapper for input field
 import FieldRendererForm from '@/components/forms/field-renderer-form';
 import PackageInstall from '@/components/docs/PackageInstall';
 import PreviewTabs from '@/components/docs/PreviewTabs';
-import code from '@/components/code/forms/field-renderer-form-code';
+import code, {
+  useCode,
+} from '@/components/code/forms/field-renderer-form-code';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -41,7 +43,7 @@ Use the following code to import FieldRenderer into any component:
 
 <DynamicCodeBlock
   lang={'tsx'}
-  code={`import { FieldRenderer } from '@/components/ui/field-renderer';`}
+  code={`import { FieldRenderer } from '@/components/ui/bloom/field-renderer';`}
 />
 </Step>
 <Step>
@@ -51,15 +53,7 @@ You can now easily use this component in your code.
 
 <DynamicCodeBlock
   lang={'tsx'}
-  code={`<FormField
-  control={form.control}
-  name="username"
-  render={({ field }) => (
-    <FieldRenderer label="Username">
-      <Input placeholder="username" {...field} />
-    </FieldRenderer>
-  )}
-/>`}
+  code={useCode}
 />
 </Step>
 </Steps>

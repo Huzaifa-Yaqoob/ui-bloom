@@ -13,7 +13,7 @@ const importCode = `import {
   Small,
   BlockQoute,
   Title,
-} from '@/components/ui/typography'`;
+} from '@/components/ui/bloom/typography'`;
 
 const componentCode = `export default function TypographyView() {
   return (

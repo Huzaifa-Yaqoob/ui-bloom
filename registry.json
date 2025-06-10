@@ -12,7 +12,8 @@
       "files": [
         {
           "path": "src/registry/password-input/password-input.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "components/ui/bloom/password-input.tsx"
         }
       ]
     },
@@ -25,7 +26,8 @@
       "files": [
         {
           "path": "src/registry/field-renderer/field-renderer.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "components/ui/bloom/field-renderer.tsx"
         }
       ]
     },
@@ -38,7 +40,8 @@
       "files": [
         {
           "path": "src/registry/react-select-input/react-select-input.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "components/ui/bloom/react-select-input.tsx"
         }
       ]
     },
@@ -62,7 +65,8 @@
       "files": [
         {
           "path": "src/registry/logical-pagination/logical-pagination.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "components/ui/bloom/logical-pagination.tsx"
         },
         {
           "path": "src/registry/hooks/useWindowWidth.ts",
@@ -78,7 +82,8 @@
       "files": [
         {
           "path": "src/registry/typography/typography.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "components/ui/bloom/typography.tsx"
         }
       ]
     }

@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import { FieldRenderer } from "@/components/ui/field-renderer";
-import { PasswordInput } from "@/components/ui//password-input";
+import { FieldRenderer } from "@/components/ui/bloom/field-renderer";
+import { PasswordInput } from "@/components/ui/bloom/password-input";
 
 const formSchema = z.object({
   password: z.string().min(8).max(50),
@@ -50,6 +50,14 @@ export function PasswordInputForm() {
 }
 `;
 
-// const
+export const useCode = `<FormField
+  control={form.control}
+  name="password"
+  render={({ field }) => (
+    <FieldRenderer label="Password">
+      <PasswordInput placeholder="password" {...field} />
+    </FieldRenderer>
+  )}
+/>`;
 
 export default passwordInputCode;

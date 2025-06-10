@@ -1,7 +1,7 @@
 const PaginationViewCode = `'use client';
 
 import { useState } from 'react';
-import { LogicalPagination } from '@/registry/logical-pagination/logical-pagination';
+import { LogicalPagination } from '@/components/ui/bloom/logical-pagination';
 
 export default function PaginationView() {
   const [currentPage, setCurrentPage] = useState(1);
