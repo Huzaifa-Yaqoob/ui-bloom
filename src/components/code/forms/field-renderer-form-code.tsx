@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import { FieldRenderer } from "@/registry/field-renderer/field-renderer";
-import { Input } from "../ui/input";
+import { FieldRenderer } from "@/components/ui/field-renderer";
+import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),

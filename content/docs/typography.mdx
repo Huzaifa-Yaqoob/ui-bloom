@@ -1,0 +1,51 @@
+---
+title: 'Typography'
+description: "A collection of responsive typography components built for shadcn/ui, featuring headings (H1-H6), paragraphs, blockquotes, and specialized text variants (Lead, Large, Small, Muted, Code). Each component supports responsive sizing, custom styling through className props, and optional rendering through Radix UI's Slot primitive for flexible composition."
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import PackageInstall from '@/components/docs/PackageInstall';
+import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
+import {
+  importCode,
+  componentCode,
+} from '@/components/code/sections/typographyCode';
+import PreviewTabs from '@/components/docs/PreviewTabs';
+import TypographyView from '@/components/sections/TypographyView';
+
+## Benefit
+
+These components are highly useful as they allow you to define and style your typography at once and reuse it consistently throughout your entire project. This approach promotes design consistency and maintainability. Additionally, you can further customize the styles to suit your specific needs.
+
+## How To Use
+
+<Steps>
+  <Step>
+    ### Install
+
+    Run this command in your terminal to install the component:
+
+    <PackageInstall name={'typography'} />
+
+  </Step>
+  <Step>
+    ### Import
+
+    You can now import this component anywhere you need to use it.
+
+    <DynamicCodeBlock lang={'tsx'} code={importCode}/>
+
+  </Step>
+</Steps>
+
+## Preview
+
+<PreviewTabs
+  component={<TypographyView />}
+  code={componentCode}
+  name={'typography'}
+/>
+
+## Accepted Props
+
+These components accept all the standard props relevant to their corresponding HTML elements—for example, `H1` accepts props for an `<h1>`, H2 for an `<h2>`, `P` for a `<p>`, and Code for a `<code>` element. Additionally, they support the `asChild` prop, allowing you to apply the respective styling without rendering the actual HTML tag. This is useful when you want the styling of a h1 without wrapping your content in an `<h1>` element.

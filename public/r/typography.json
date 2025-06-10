@@ -3,7 +3,7 @@
   "name": "typography",
   "type": "registry:ui",
   "title": "Typography",
-  "description": "A password input field with a toggle option to show or hide the password.",
+  "description": "A comprehensive set of typography components including headings (H1-H6), paragraphs, blockquotes, code blocks, and text variants with responsive sizing and styling.",
   "files": [
     {
       "path": "src/registry/typography/typography.tsx",
