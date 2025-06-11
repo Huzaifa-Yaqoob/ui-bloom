@@ -1,9 +1,9 @@
-import TypographyView from '@/components/sections/TypographyView';
+import FetchPost from '@/components/sections/FetchPost';
 
 export default function Page() {
   return (
     <div className="px-4">
-      <TypographyView />
+      <FetchPost />
     </div>
   );
 }
