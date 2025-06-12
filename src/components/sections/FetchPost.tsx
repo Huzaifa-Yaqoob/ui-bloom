@@ -37,7 +37,7 @@ export default function FetchPost() {
   };
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="space-y-4 p-4">
       <h1 className="text-xl font-bold">Fetch Post</h1>
       <div>
         <label className="mr-2">Post ID:</label>
@@ -45,11 +45,11 @@ export default function FetchPost() {
           type="number"
           value={postId}
           onChange={(e) => setPostId(Number(e.target.value))}
-          className="border px-2 py-1 rounded"
+          className="rounded border px-2 py-1"
         />
         <button
           onClick={handleFetch}
-          className="ml-2 px-4 py-1 bg-blue-600 text-white rounded"
+          className="ml-2 rounded bg-blue-600 px-4 py-1 text-white"
         >
           Fetch
         </button>
@@ -58,7 +58,7 @@ export default function FetchPost() {
       {isPending && <p>Loading...</p>}
       {isFailure && <p className="text-red-500">Error: {String(error)}</p>}
       {isSuccess && data && (
-        <div className="p-2 border rounded">
+        <div className="rounded border p-2">
           <h2 className="font-semibold">Title: {data.title}</h2>
           <p>{data.body}</p>
         </div>

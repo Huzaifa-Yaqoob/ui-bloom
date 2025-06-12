@@ -18,14 +18,14 @@ export default function PreviewTabs({
 
   return (
     <div className="space-y-4">
-      <div className="border-b flex justify-between items-center">
+      <div className="flex items-center justify-between border-b">
         <div>
           <button
             onClick={() => {
               setIsUi(true);
             }}
             className={
-              'p-4 border-foreground cursor-pointer ' + (isUi && 'border-b')
+              'border-foreground cursor-pointer p-4 ' + (isUi && 'border-b')
             }
           >
             UI
@@ -35,7 +35,7 @@ export default function PreviewTabs({
               setIsUi(false);
             }}
             className={
-              'p-4 border-foreground cursor-pointer ' + (!isUi && 'border-b')
+              'border-foreground cursor-pointer p-4 ' + (!isUi && 'border-b')
             }
           >
             Code

@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "React Select",
   "description": "A customizable select component built with react-select that integrates seamlessly with shadcn/ui, supporting multi-select, form validation, and dynamic option creation.",
-  "dependencies": [
-    "react-select@5.10.1"
-  ],
+  "dependencies": ["react-select@5.10.1"],
   "files": [
     {
       "path": "src/registry/react-select-input/react-select-input.tsx",

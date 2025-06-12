@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
-import { FieldRenderer } from "@/registry/field-renderer/field-renderer";
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
+import { Form, FormField } from '@/components/ui/form';
+import { FieldRenderer } from '@/registry/field-renderer/field-renderer';
 import {
   ReactAsyncSelect,
   convertToOptions,
   MyOption,
   flattenOptions,
   convertToOption,
-} from "@/registry/react-select-input/react-select-input";
-import { options, groupedOptions } from "@/data/options";
+} from '@/registry/react-select-input/react-select-input';
+import { options, groupedOptions } from '@/data/options';
 
 const formSchema = z.object({
   color: z
@@ -35,7 +35,7 @@ const formSchema = z.object({
 const filterOptions = (inputValue: string) => {
   const options = flattenOptions(groupedOptions);
   return options.filter((i) => {
-    if (typeof i.label === "string") {
+    if (typeof i.label === 'string') {
       return i.label.toLowerCase().includes(inputValue.toLowerCase());
     }
     return;
@@ -54,8 +54,8 @@ export function AsyncForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      color: convertToOption("", options),
-      color2: convertToOptions(["smoothie", "juice"], groupedOptions),
+      color: convertToOption('', options),
+      color2: convertToOptions(['smoothie', 'juice'], groupedOptions),
     },
   });
 
@@ -70,7 +70,7 @@ export function AsyncForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 w-full border rounded-md p-8"
+        className="w-full space-y-8 rounded-md border p-8"
       >
         <FormField
           control={form.control}

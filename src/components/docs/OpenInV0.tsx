@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import config from "config";
+import { Button } from '@/components/ui/button';
+import config from 'config';
 
 export function OpenInV0({
   name,
@@ -12,7 +12,7 @@ export function OpenInV0({
         rel="noreferrer"
         className="no-underline"
       >
-        Open in{" "}
+        Open in{' '}
         <svg
           viewBox="0 0 40 20"
           fill="none"

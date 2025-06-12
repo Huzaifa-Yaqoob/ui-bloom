@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Field Renderer",
   "description": "A password input field with a toggle option to show or hide the password.",
-  "registryDependencies": [
-    "form"
-  ],
+  "registryDependencies": ["form"],
   "files": [
     {
       "path": "src/registry/field-renderer/field-renderer.tsx",

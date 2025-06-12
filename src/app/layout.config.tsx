@@ -11,7 +11,7 @@ import Logo from '@/components/icons/Logo';
 export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
-      <div className="flex items-center gap-2 w-fit dark:text-white text-black">
+      <div className="flex w-fit items-center gap-2 text-black dark:text-white">
         <Logo width={32} height={32} /> UI Bloom
       </div>
     ),

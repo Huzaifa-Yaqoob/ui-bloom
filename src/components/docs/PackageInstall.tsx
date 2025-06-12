@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
-import config from "config";
+import { useEffect, useState } from 'react';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
+import config from 'config';
 
 export default function PackageInstall({ name }: { name: string }) {
   const [isMounted, setIsMounted] = useState(false);
 
   const packageManagers = [
     {
-      name: "npm",
+      name: 'npm',
       command: `npx shadcn@latest add ${config.baseUrl}/r/${name}.json`,
     },
     {
-      name: "pnpm",
+      name: 'pnpm',
       command: `pnpm dlx shadcn@latest add ${config.baseUrl}/r/${name}.json`,
     },
     {
-      name: "yarn",
+      name: 'yarn',
       command: `npx shadcn@latest add ${config.baseUrl}/r/${name}.json`,
     },
     {
-      name: "bun",
+      name: 'bun',
       command: `bunx --bun shadcn@latest add ${config.baseUrl}/r/${name}.json`,
     },
   ];

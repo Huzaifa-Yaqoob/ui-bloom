@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
-import { FieldRenderer } from "@/registry/field-renderer/field-renderer";
-import { Input } from "../ui/input";
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
+import { Form, FormField } from '@/components/ui/form';
+import { FieldRenderer } from '@/registry/field-renderer/field-renderer';
+import { Input } from '../ui/input';
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -17,7 +17,7 @@ export default function FieldRendererForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      username: '',
     },
   });
 
@@ -32,7 +32,7 @@ export default function FieldRendererForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 w-full border rounded-md p-4 max-w-[500px]"
+        className="w-full max-w-[500px] space-y-8 rounded-md border p-4"
       >
         <FormField
           control={form.control}

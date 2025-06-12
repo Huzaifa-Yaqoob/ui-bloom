@@ -131,7 +131,7 @@ function LogicalPagination(props: LogicalPaginationProps) {
   }, [currentPage, totalPages, visiblePages]);
 
   return (
-    <div className={cn('flex items-center gap-2 flex-wrap', className)}>
+    <div className={cn('flex flex-wrap items-center gap-2', className)}>
       {isPrev && (
         <PreviousComponent
           onClick={() => onPageChange(Math.max(1, currentPage - 1))}

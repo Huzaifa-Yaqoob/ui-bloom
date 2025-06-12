@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
-import { FieldRenderer } from "@/registry/field-renderer/field-renderer";
-import { PasswordInput } from "@/registry/password-input/password-input";
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
+import { Form, FormField } from '@/components/ui/form';
+import { FieldRenderer } from '@/registry/field-renderer/field-renderer';
+import { PasswordInput } from '@/registry/password-input/password-input';
 
 const formSchema = z.object({
   password: z.string().min(8).max(50),
@@ -17,7 +17,7 @@ export function PasswordInputForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      password: "",
+      password: '',
     },
   });
 
@@ -32,7 +32,7 @@ export function PasswordInputForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 w-full border rounded-md p-4 max-w-[500px]"
+        className="w-full max-w-[500px] space-y-8 rounded-md border p-4"
       >
         <FormField
           control={form.control}

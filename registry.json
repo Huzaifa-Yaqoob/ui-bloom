@@ -86,6 +86,18 @@
           "target": "components/ui/bloom/typography.tsx"
         }
       ]
+    },
+    {
+      "name": "useAsyncRunner",
+      "type": "registry:hook",
+      "title": "useAsyncRunner Hook",
+      "description": "hook is a reusable utility for executing async functions with built-in state management for loading, success, failure, and error handling—all fully type-safe without using any.",
+      "files": [
+        {
+          "path": "src/registry/hooks/useAsyncRunner.ts",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }

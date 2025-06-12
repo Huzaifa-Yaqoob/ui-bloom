@@ -15,7 +15,7 @@ export function H1({
   return (
     <Comp
       className={cn(
-        'scroll-m-20 text-center text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-balance',
+        'scroll-m-20 text-center text-2xl font-extrabold tracking-tight text-balance sm:text-3xl md:text-4xl',
         className
       )}
       {...props}
@@ -38,7 +38,7 @@ export function H2({
   return (
     <Comp
       className={cn(
-        'scroll-m-20 pb-2 text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight',
+        'scroll-m-20 pb-2 text-xl font-semibold tracking-tight sm:text-2xl md:text-3xl',
         className
       )}
       {...props}
@@ -61,7 +61,7 @@ export function H3({
   return (
     <Comp
       className={cn(
-        'scroll-m-20 text-lg sm:text-xl md:text-2xl font-semibold tracking-tight',
+        'scroll-m-20 text-lg font-semibold tracking-tight sm:text-xl md:text-2xl',
         className
       )}
       {...props}
@@ -84,7 +84,7 @@ export function H4({
   return (
     <Comp
       className={cn(
-        'scroll-m-20 text-base sm:text-lg md:text-xl font-semibold tracking-tight',
+        'scroll-m-20 text-base font-semibold tracking-tight sm:text-lg md:text-xl',
         className
       )}
       {...props}
@@ -107,7 +107,7 @@ export function H5({
   return (
     <Comp
       className={cn(
-        'scroll-m-20 text-base sm:text-lg md:text-xl font-semibold tracking-tight',
+        'scroll-m-20 text-base font-semibold tracking-tight sm:text-lg md:text-xl',
         className
       )}
       {...props}
@@ -130,7 +130,7 @@ export function H6({
   return (
     <Comp
       className={cn(
-        'scroll-m-20 text-base sm:text-lg md:text-xl font-semibold tracking-tight',
+        'scroll-m-20 text-base font-semibold tracking-tight sm:text-lg md:text-xl',
         className
       )}
       {...props}
@@ -153,7 +153,7 @@ export function P({
   return (
     <Comp
       className={cn(
-        'leading-6 md:leading-7 text-sm sm:text-base [&:not(:first-child)]:mt-4 sm:[&:not(:first-child)]:mt-6',
+        'text-sm leading-6 sm:text-base md:leading-7 [&:not(:first-child)]:mt-4 sm:[&:not(:first-child)]:mt-6',
         className
       )}
       {...props}
@@ -176,7 +176,7 @@ export function BlockQoute({
   return (
     <Comp
       className={cn(
-        'mt-4 sm:mt-6 border-l-2 pl-4 sm:pl-6 text-sm sm:text-base italic',
+        'mt-4 border-l-2 pl-4 text-sm italic sm:mt-6 sm:pl-6 sm:text-base',
         className
       )}
       {...props}
@@ -199,7 +199,7 @@ export function Code({
   return (
     <Comp
       className={cn(
-        'bg-muted relative rounded px-[0.2rem] sm:px-[0.3rem] py-[0.15rem] sm:py-[0.2rem] font-mono text-xs sm:text-sm font-semibold',
+        'bg-muted relative rounded px-[0.2rem] py-[0.15rem] font-mono text-xs font-semibold sm:px-[0.3rem] sm:py-[0.2rem] sm:text-sm',
         className
       )}
       {...props}
@@ -244,7 +244,7 @@ export function Large({
   const Comp = asChild ? Slot : 'span';
   return (
     <Comp
-      className={cn('text-base sm:text-lg md:text-xl font-semibold', className)}
+      className={cn('text-base font-semibold sm:text-lg md:text-xl', className)}
       {...props}
     >
       {children}
@@ -264,7 +264,7 @@ export function Small({
   const Comp = asChild ? Slot : 'span';
   return (
     <Comp
-      className={cn('text-xs sm:text-sm leading-none font-medium', className)}
+      className={cn('text-xs leading-none font-medium sm:text-sm', className)}
       {...props}
     >
       {children}
