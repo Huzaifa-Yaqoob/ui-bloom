@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import useAsyncRunner from '@/registry/hooks/useAsyncRunner'; // adjust the import path as needed
+import { useAsyncRunner } from '@/registry/hooks/useAsyncRunner'; // adjust the import path as needed
 
 // Define the shape of the data returned from JSONPlaceholder
 type Post = {

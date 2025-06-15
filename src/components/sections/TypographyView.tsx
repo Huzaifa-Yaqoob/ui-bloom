@@ -11,7 +11,7 @@ import {
   Lead,
   Muted,
   Small,
-  BlockQoute,
+  BlockQuote,
   Title,
 } from '@/registry/typography/typography';
 
@@ -36,11 +36,11 @@ export default function TypographyView() {
           spacing that adjusts responsively.
         </P>
 
-        <BlockQoute>
+        <BlockQuote>
           This is a block quote that showcases how quotations look. It includes
           proper styling with a left border and italic text that adjusts based
           on screen size.
-        </BlockQoute>
+        </BlockQuote>
 
         <P>
           Here is some text with a <Code>code snippet</Code> embedded within it.

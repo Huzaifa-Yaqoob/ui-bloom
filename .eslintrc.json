@@ -1,3 +1,14 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript", "plugin:mdx/recommended"],
+  "overrides": [
+    {
+      "files": ["**/*.mdx"],
+      "parser": "@mdx-js/eslint-mdx",
+      "extends": ["plugin:mdx/recommended"],
+      "rules": {
+        "react/jsx-key": "off",
+        "no-unused-expressions": "off"
+      }
+    }
+  ]
 }
