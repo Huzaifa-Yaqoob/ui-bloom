@@ -4,11 +4,13 @@
   "type": "registry:ui",
   "title": "Field Renderer",
   "description": "A password input field with a toggle option to show or hide the password.",
-  "registryDependencies": ["form"],
+  "registryDependencies": [
+    "form"
+  ],
   "files": [
     {
       "path": "src/registry/field-renderer/field-renderer.tsx",
-      "content": "import {\n  FormControl,\n  FormDescription,\n  FormItem,\n  FormLabel,\n  FormMessage,\n} from \"@/components/ui/form\";\n\nexport function FieldRenderer({\n  label,\n  description,\n  children,\n}: {\n  label?: React.ReactNode;\n  description?: React.ReactNode;\n  children: React.ReactNode;\n}) {\n  return (\n    <FormItem>\n      {label && <FormLabel>{label}</FormLabel>}\n      <FormControl>{children}</FormControl>\n      {description && <FormDescription>{description}</FormDescription>}\n      <FormMessage />\n    </FormItem>\n  );\n}\n",
+      "content": "import { ReactNode } from 'react';\nimport {\n  FormControl,\n  FormDescription,\n  FormItem,\n  FormLabel,\n  FormMessage,\n} from '@/components/ui/form';\n\nexport function FieldRenderer({\n  label,\n  description,\n  children,\n}: {\n  label?: ReactNode;\n  description?: ReactNode;\n  children: ReactNode;\n}) {\n  return (\n    <FormItem>\n      {label && <FormLabel>{label}</FormLabel>}\n      <FormControl>{children}</FormControl>\n      {description && <FormDescription>{description}</FormDescription>}\n      <FormMessage />\n    </FormItem>\n  );\n}\n",
       "type": "registry:ui",
       "target": "components/ui/bloom/field-renderer.tsx"
     }

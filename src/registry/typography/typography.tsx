@@ -1,8 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
-import { ReactNode, ComponentProps } from 'react';
+import { ReactNode, ComponentProps, memo } from 'react';
 import { cn } from '@/lib/utils';
 
-export function H1({
+function H1Component({
   asChild = false,
   children,
   className,
@@ -25,7 +25,7 @@ export function H1({
   );
 }
 
-export function H2({
+function H2Component({
   asChild = false,
   children,
   className,
@@ -48,7 +48,7 @@ export function H2({
   );
 }
 
-export function H3({
+function H3Component({
   asChild = false,
   children,
   className,
@@ -71,7 +71,7 @@ export function H3({
   );
 }
 
-export function H4({
+function H4Component({
   asChild = false,
   children,
   className,
@@ -94,7 +94,7 @@ export function H4({
   );
 }
 
-export function H5({
+function H5Component({
   asChild = false,
   children,
   className,
@@ -117,7 +117,7 @@ export function H5({
   );
 }
 
-export function H6({
+function H6Component({
   asChild = false,
   children,
   className,
@@ -140,7 +140,7 @@ export function H6({
   );
 }
 
-export function P({
+function PComponent({
   asChild = false,
   children,
   className,
@@ -163,7 +163,7 @@ export function P({
   );
 }
 
-export function BlockQoute({
+function BlockQuoteComponent({
   asChild = false,
   children,
   className,
@@ -186,7 +186,7 @@ export function BlockQoute({
   );
 }
 
-export function Code({
+function CodeComponent({
   asChild = false,
   children,
   className,
@@ -209,7 +209,7 @@ export function Code({
   );
 }
 
-export function Lead({
+function LeadComponent({
   asChild = false,
   children,
   className,
@@ -232,7 +232,7 @@ export function Lead({
   );
 }
 
-export function Large({
+function LargeComponent({
   asChild = false,
   children,
   className,
@@ -252,7 +252,7 @@ export function Large({
   );
 }
 
-export function Small({
+function SmallComponent({
   asChild = false,
   children,
   className,
@@ -272,7 +272,7 @@ export function Small({
   );
 }
 
-export function Muted({
+function MutedComponent({
   asChild = false,
   children,
   className,
@@ -292,7 +292,7 @@ export function Muted({
   );
 }
 
-export function Title({
+function TitleComponent({
   asChild = false,
   children,
   className,
@@ -314,3 +314,35 @@ export function Title({
     </Comp>
   );
 }
+
+const H1 = memo(H1Component);
+const H2 = memo(H2Component);
+const H3 = memo(H3Component);
+const H4 = memo(H4Component);
+const H5 = memo(H5Component);
+const H6 = memo(H6Component);
+const P = memo(PComponent);
+const BlockQuote = memo(BlockQuoteComponent);
+const Code = memo(CodeComponent);
+const Lead = memo(LeadComponent);
+const Large = memo(LargeComponent);
+const Small = memo(SmallComponent);
+const Muted = memo(MutedComponent);
+const Title = memo(TitleComponent);
+
+export {
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  P,
+  BlockQuote,
+  Code,
+  Lead,
+  Large,
+  Small,
+  Muted,
+  Title,
+};

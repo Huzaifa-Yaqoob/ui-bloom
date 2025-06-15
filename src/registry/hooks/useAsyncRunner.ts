@@ -10,7 +10,7 @@ type UseAsyncRunnerParams<Args extends unknown[], Return> = {
   action: AsyncCallback<Args, Return>;
 };
 
-export default function useAsyncRunner<Args extends unknown[], Return>({
+function useAsyncRunner<Args extends unknown[], Return>({
   action,
 }: UseAsyncRunnerParams<Args, Return>) {
   const [isPending, setIsPending] = useState(false);
@@ -49,3 +49,5 @@ export default function useAsyncRunner<Args extends unknown[], Return>({
     error,
   };
 }
+
+export { useAsyncRunner };

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, ComponentProps, FC } from 'react';
+import { useMemo, memo, ComponentProps, FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { Ellipsis, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useWindowWidth, BreakPoints } from '../hooks/useWindowWidth';
@@ -34,7 +34,7 @@ const logicalPaginationDefaultProps = {
   isNext: true,
 };
 
-function LogicalPagination(props: LogicalPaginationProps) {
+function LogicalPaginationComponent(props: LogicalPaginationProps) {
   const {
     size,
     totalPages,
@@ -170,8 +170,8 @@ const DefaultPageNumber: FC<PageNumberProps> = ({
   </Button>
 );
 
-const DefaultGapPlaceholder: FC = () => (
-  <Button variant="ghost" size="sm" disabled>
+const DefaultGapPlaceholder: FC<ComponentProps<'button'>> = (props) => (
+  <Button variant="ghost" size="sm" disabled {...props}>
     <Ellipsis />
   </Button>
 );
@@ -187,5 +187,8 @@ const DefaultNext: FC<ComponentProps<'button'>> = (props) => (
     <ChevronRight />
   </Button>
 );
+
+// memorizing
+const LogicalPagination = memo(LogicalPaginationComponent);
 
 export { LogicalPagination, type PageNumberProps };

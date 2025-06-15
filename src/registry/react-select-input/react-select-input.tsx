@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo, useMemo } from 'react';
 import { ComponentProps } from 'react';
 import { X, ChevronDown, Loader } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -71,7 +72,7 @@ const customClassNames = {
   disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
 };
 
-function ReactSelect({
+const ReactSelect = memo(function ReactSelect({
   classNames = {},
   options,
   components = {},
@@ -85,24 +86,40 @@ function ReactSelect({
     ...otherComponents
   } = components;
 
+  const mergedComponents = useMemo(
+    () => ({
+      ClearIndicator: ClearIndicator || CustomClearIndicator,
+      LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
+      DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
+      MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
+      ...otherComponents,
+    }),
+    [
+      ClearIndicator,
+      LoadingIndicator,
+      DropdownIndicator,
+      MultiValueRemove,
+      otherComponents,
+    ]
+  );
+
+  const mergedClassNames = useMemo(
+    () => getClassNames(classNames),
+    [classNames]
+  );
+
   return (
     <Select
-      unstyled={true}
+      unstyled
       {...selectProps}
       options={options}
-      components={{
-        ClearIndicator: ClearIndicator || CustomClearIndicator,
-        LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
-        DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
-        MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
-        ...otherComponents,
-      }}
-      classNames={getClassNames(classNames)}
+      components={mergedComponents}
+      classNames={mergedClassNames}
     />
   );
-}
+});
 
-function ReactAsyncSelect({
+const ReactAsyncSelect = memo(function ReactAsyncSelect({
   classNames = {},
   options,
   components = {},
@@ -116,24 +133,40 @@ function ReactAsyncSelect({
     ...otherComponents
   } = components;
 
+  const mergedComponents = useMemo(
+    () => ({
+      ClearIndicator: ClearIndicator || CustomClearIndicator,
+      LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
+      DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
+      MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
+      ...otherComponents,
+    }),
+    [
+      ClearIndicator,
+      LoadingIndicator,
+      DropdownIndicator,
+      MultiValueRemove,
+      otherComponents,
+    ]
+  );
+
+  const mergedClassNames = useMemo(
+    () => getClassNames(classNames),
+    [classNames]
+  );
+
   return (
     <AsyncSelect
-      unstyled={true}
+      unstyled
       {...selectProps}
       options={options}
-      components={{
-        ClearIndicator: ClearIndicator || CustomClearIndicator,
-        LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
-        DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
-        MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
-        ...otherComponents,
-      }}
-      classNames={getClassNames(classNames)}
+      components={mergedComponents}
+      classNames={mergedClassNames}
     />
   );
-}
+});
 
-function ReactCreatableSelect({
+const ReactCreatableSelect = memo(function ReactCreatableSelect({
   classNames = {},
   options,
   components = {},
@@ -147,24 +180,40 @@ function ReactCreatableSelect({
     ...otherComponents
   } = components;
 
+  const mergedComponents = useMemo(
+    () => ({
+      ClearIndicator: ClearIndicator || CustomClearIndicator,
+      LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
+      DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
+      MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
+      ...otherComponents,
+    }),
+    [
+      ClearIndicator,
+      LoadingIndicator,
+      DropdownIndicator,
+      MultiValueRemove,
+      otherComponents,
+    ]
+  );
+
+  const mergedClassNames = useMemo(
+    () => getClassNames(classNames),
+    [classNames]
+  );
+
   return (
     <CreatableSelect
-      unstyled={true}
+      unstyled
       {...selectProps}
       options={options}
-      components={{
-        ClearIndicator: ClearIndicator || CustomClearIndicator,
-        LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
-        DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
-        MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
-        ...otherComponents,
-      }}
-      classNames={getClassNames(classNames)}
+      components={mergedComponents}
+      classNames={mergedClassNames}
     />
   );
-}
+});
 
-function ReactAsyncCreatableSelect({
+const ReactAsyncCreatableSelect = memo(function ReactAsyncCreatableSelect({
   classNames = {},
   options,
   components = {},
@@ -178,22 +227,38 @@ function ReactAsyncCreatableSelect({
     ...otherComponents
   } = components;
 
+  const mergedComponents = useMemo(
+    () => ({
+      ClearIndicator: ClearIndicator || CustomClearIndicator,
+      LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
+      DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
+      MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
+      ...otherComponents,
+    }),
+    [
+      ClearIndicator,
+      LoadingIndicator,
+      DropdownIndicator,
+      MultiValueRemove,
+      otherComponents,
+    ]
+  );
+
+  const mergedClassNames = useMemo(
+    () => getClassNames(classNames),
+    [classNames]
+  );
+
   return (
     <AsyncCreatableSelect
-      unstyled={true}
+      unstyled
       {...selectProps}
       options={options}
-      components={{
-        ClearIndicator: ClearIndicator || CustomClearIndicator,
-        LoadingIndicator: LoadingIndicator || CustomLoadingIndicator,
-        DropdownIndicator: DropdownIndicator || CustomDropdownIndicator,
-        MultiValueRemove: MultiValueRemove || CustomMultiValueRemove,
-        ...otherComponents,
-      }}
-      classNames={getClassNames(classNames)}
+      components={mergedComponents}
+      classNames={mergedClassNames}
     />
   );
-}
+});
 
 function getClassNames(
   classNames: ClassNamesConfig<unknown, boolean, GroupBase<unknown>>

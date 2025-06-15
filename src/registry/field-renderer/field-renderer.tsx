@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import {
   FormControl,
   FormDescription,
@@ -11,9 +12,9 @@ export function FieldRenderer({
   description,
   children,
 }: {
-  label?: React.ReactNode;
-  description?: React.ReactNode;
-  children: React.ReactNode;
+  label?: ReactNode;
+  description?: ReactNode;
+  children: ReactNode;
 }) {
   return (
     <FormItem>
