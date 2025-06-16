@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-export function FieldRenderer({
+function FieldRenderer({
   label,
   description,
   children,
@@ -25,3 +25,5 @@ export function FieldRenderer({
     </FormItem>
   );
 }
+
+export { FieldRenderer };
