@@ -1,9 +1,19 @@
+import { allPosts } from "content-collections";
 
+export default function Posts() {
 
-export default function Page() {
+  console.log(allPosts);
+
   return (
-    <div className="flex min-h-svh p-6">
-
-    </div>
-  )
+    <ul>
+      {allPosts.map((post) => (
+        <li key={post._meta.path}>
+          <a href={`/posts/${post._meta.path}`}>
+            <h3>{post.title}</h3>
+            <p>{post.summary}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
 }

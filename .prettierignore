@@ -9,3 +9,5 @@ bun.lockb
 .env
 .env.local
 .env.*.local
+
+content-collections
