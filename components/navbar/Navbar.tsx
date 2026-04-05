@@ -1,7 +1,7 @@
+import { Section } from "@/components/common/Section";
+
 function Navbar() {
-  return (
-    <div>ui bloom</div>
-  );
+  return <Section render={<nav />}>HI</Section>;
 }
 
 export default Navbar;
