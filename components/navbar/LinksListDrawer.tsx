@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
 import Logo from "@/components/common/Logo";
 import { Typography } from "@/components/common/Typography";
 import MainNavList from "@/components/navbar/MainNavList";
@@ -10,9 +15,10 @@ import {
 } from "@/components/ui/drawer";
 
 function LinksListDrawer() {
+  const [open, setOpen] = useState(false);
   return (
-    <Drawer direction={"left"}>
-      <DrawerTrigger className={"md:hidden"}>Open</DrawerTrigger>
+    <Drawer direction={"left"} open={open} onOpenChange={setOpen}>
+      <DrawerTrigger className={"md:hidden"}>{open ? <X /> : <Menu />}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className={"flex flex-row items-end gap-4"}>
           <Logo className={"size-12"} />
