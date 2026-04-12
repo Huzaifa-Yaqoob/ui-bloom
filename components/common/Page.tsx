@@ -10,7 +10,6 @@ const sizeClassMap = {
   md: "py-4 md:py-6 lg:py-8",
   lg: "py-6 md:py-8 lg:py-12",
   xl: "py-8 md:py-12 lg:py-14 xl:py-16",
-  full: "grow flex flex-col",
 };
 
 type SectionSize = keyof typeof sizeClassMap;
@@ -28,7 +27,11 @@ export function Section<T extends React.ElementType = "section">(props: SectionP
     defaultTagName: "section",
     render,
     props: mergeProps(otherProps, {
-      className: cn(`px-2 md:px-4 lg:px-6 xl:px-8 ${sizeClassMap[sectionSize as SectionSize]}`),
+      // TS loses the literal union type for `sectionSize` due to generic prop merging,
+      // so we assert it here to safely index into `sizeClassMap`.
+      className: cn(
+        `px-2 md:px-4 lg:px-6 xl:min-h-[calc(100vh-68px)] xl:px-8 ${sizeClassMap[sectionSize as SectionSize]}`,
+      ),
     }),
   });
 }

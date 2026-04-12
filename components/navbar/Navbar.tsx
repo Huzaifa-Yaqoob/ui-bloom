@@ -9,7 +9,7 @@ function Navbar() {
     <Section
       sectionSize="sm"
       render={<nav />}
-      className={"relative z-[60] flex items-center justify-between bg-background"}
+      className={"relative sticky top-0 z-[60] flex items-center justify-between bg-background"}
     >
       <LinksListDrawer />
       <MainNavList />

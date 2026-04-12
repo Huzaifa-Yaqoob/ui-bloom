@@ -22,9 +22,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
+      className={cn("h-full antialiased", fontMono.variable, "font-sans", inter.variable)}
     >
-      <body>
+      <body className={"h-full"}>
         <ThemeProvider>
           <Navbar />
           {children}
