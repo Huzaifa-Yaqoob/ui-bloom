@@ -18,10 +18,12 @@ function LinksListDrawer() {
   const [open, setOpen] = useState(false);
   return (
     <Drawer direction={"left"} open={open} onOpenChange={setOpen}>
-      <DrawerTrigger className={"md:hidden"}>{open ? <X /> : <Menu />}</DrawerTrigger>
+      <DrawerTrigger className={"md:hidden"}>
+        {open ? <X size={18} /> : <Menu size={18} />}
+      </DrawerTrigger>
 
-      <DrawerContent className="rounded-r-0 mt-12 h-[calc(100vh-48px)] border-none">
-        <DrawerHeader className={"flex flex-row items-end gap-4"}>
+      <DrawerContent className="rounded-r-0 mt-12 h-[calc(100vh-48px)] border-none pt-4">
+        <DrawerHeader className={"sr-only flex flex-row items-end gap-4"}>
           <Logo className={"size-12"} />
           <Typography variant="h3" render={<DrawerTitle />}>
             UI Bloom

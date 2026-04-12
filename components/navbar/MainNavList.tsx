@@ -8,11 +8,6 @@ import { cn } from "@/lib/utils";
 function MainNavList({ className }: { className?: string }) {
   return (
     <ul className={cn("hidden items-center gap-2 md:flex lg:gap-8", className)}>
-      <li className={"hidden md:block"}>
-        <Button variant={"ghost"} size={"icon-lg"}>
-          <Logo className={"size-6"} />
-        </Button>
-      </li>
       {mainLisLinks.map((link) => (
         <li key={link.path} className={"w-full md:w-fit"}>
           <Button
