@@ -19,12 +19,13 @@ function LinksListDrawer() {
   return (
     <Drawer direction={"left"} open={open} onOpenChange={setOpen}>
       <DrawerTrigger className={"md:hidden"}>{open ? <X /> : <Menu />}</DrawerTrigger>
-      <DrawerContent>
+
+      <DrawerContent className="bottom-16 h-[calc(100vh-64px)] rounded-none">
         <DrawerHeader className={"flex flex-row items-end gap-4"}>
           <Logo className={"size-12"} />
-          <DrawerTitle>
-            <Typography render={<h3 />}>UI Bloom</Typography>
-          </DrawerTitle>
+          <Typography variant="h3" render={<DrawerTitle />}>
+            UI Bloom
+          </Typography>
         </DrawerHeader>
         <MainNavList className={"flex w-full flex-col"} />
       </DrawerContent>
