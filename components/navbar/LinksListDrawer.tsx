@@ -20,7 +20,7 @@ function LinksListDrawer() {
     <Drawer direction={"left"} open={open} onOpenChange={setOpen}>
       <DrawerTrigger className={"md:hidden"}>{open ? <X /> : <Menu />}</DrawerTrigger>
 
-      <DrawerContent className="bottom-16 h-[calc(100vh-64px)] rounded-none">
+      <DrawerContent className="mt-12 h-[calc(100vh-48px)] rounded-none">
         <DrawerHeader className={"flex flex-row items-end gap-4"}>
           <Logo className={"size-12"} />
           <Typography variant="h3" render={<DrawerTitle />}>

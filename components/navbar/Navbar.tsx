@@ -6,7 +6,11 @@ import ThemeToggle from "@/components/navbar/ThemeToggle";
 
 function Navbar() {
   return (
-    <Section sectionSize="sm" render={<nav />} className={"flex items-center justify-between"}>
+    <Section
+      sectionSize="sm"
+      render={<nav />}
+      className={"relative z-[60] flex items-center justify-between bg-background"}
+    >
       <LinksListDrawer />
       <MainNavList />
       <div>
