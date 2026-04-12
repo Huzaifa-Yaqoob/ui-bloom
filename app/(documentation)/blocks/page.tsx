@@ -1,5 +1,7 @@
+import PageSection from "@/components/common/Page";
+
 function Page() {
-  return <div>Blocks</div>;
+  return <PageSection>Blocks</PageSection>;
 }
 
 export default Page;
